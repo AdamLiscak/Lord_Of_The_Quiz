@@ -16,8 +16,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected Bitmap doInBackground(String... urls) {
-        String[] hosts={"adislav-pc","bacock"};
-        String urldisplay ="http://"+hosts[0]+"/"+urls[0];
+        String urldisplay = urls[0];
         Bitmap bmp = null;
         try {
             InputStream in = new java.net.URL(urldisplay).openStream();

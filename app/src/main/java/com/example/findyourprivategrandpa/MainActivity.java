@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity
         Bitmap bmp;
         ImageView imageView=findViewById(R.id.imageView);
         DownloadImageTask downloadImageTask=new DownloadImageTask(imageView);
-        downloadImageTask.execute("grandPaSeeker/chadDaniels.jpg");
+        downloadImageTask.execute("http://adislav-pc/lord_of_the_quiz_backend/chadDaniels.jpg");
 
     }
 }
