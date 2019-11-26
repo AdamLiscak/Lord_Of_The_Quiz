@@ -8,6 +8,10 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.findyourprivategrandpa.ControllerInterfaces.DownloadImageTask;
+import com.example.findyourprivategrandpa.ControllerInterfaces.FileStringifier;
+import com.example.findyourprivategrandpa.ControllerInterfaces.HostResolver;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -21,7 +25,22 @@ public class MainActivity extends AppCompatActivity
         String hostUrl= new HostResolver().findHost();
         Log.d("host", "onCreate: "+hostUrl);
         downloadImageTask.execute((hostUrl+"lord_of_the_quiz_backend/chadDaniels.jpg"));
-        new FileDownloader().download();
+        String json=new FileStringifier(hostUrl+"lord_of_the_quiz_backend/grandpa.json").stringify();
+        JSONObject jsonObject=null;
+        String name="";
+        try
+        {
+            jsonObject= new JSONObject(json);
+            JSONObject grandpa=  jsonObject.getJSONObject("grandpa");
+            name=grandpa.getString("name");
+        }
+        catch (Exception e)
+        {
+        }
+        Log.d("penis cock create", "onCreate: "+name);
+
+
+
 
     }
 }

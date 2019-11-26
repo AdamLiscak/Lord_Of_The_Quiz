@@ -20,6 +20,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         Bitmap bmp = null;
         try {
             InputStream in = new java.net.URL(urldisplay).openStream();
+            Log.d("penis", "doInBackground: "+in.available());
             bmp = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
             Log.e("Error", e.getMessage());

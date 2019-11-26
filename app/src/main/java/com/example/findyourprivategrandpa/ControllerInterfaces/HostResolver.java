@@ -1,4 +1,4 @@
-package com.example.findyourprivategrandpa;
+package com.example.findyourprivategrandpa.ControllerInterfaces;
 import java.net.HttpURLConnection;
 import java.net.URL;
 public class HostResolver
@@ -35,11 +35,6 @@ public class HostResolver
         {
             return this.address;
         }
-    }
-    public static void main(String[] args)
-    {
-        HostResolver h=new HostResolver();
-        System.out.println(h.findHost());
     }
     public String findHost()
     {
