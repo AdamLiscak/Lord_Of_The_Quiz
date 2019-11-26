@@ -1,31 +1,59 @@
 package com.example.findyourprivategrandpa;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 public class HostResolver
 {
-    private final String[] hosts={"adislav-pc","bacock","JuliPC"};
-    public String findHost()
+    private class AddressGetter extends Thread
     {
-        for (String host: hosts) {
-            try
-            {
-                URL url = new URL("http://" + host);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("HEAD");
-                int responseCode = connection.getResponseCode();
-                if (responseCode == 200)
+        private final String[] hosts={"adislav-pc","bacock","JuliPC"};
+        String address;
+        @Override
+        public void run()
+        {
+            for (String host: hosts) {
+                try
                 {
-                    return "http://"+host+"/";
+
+                    URL url = new URL("http://" + host);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("HEAD");
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == 200)
+                    {
+                        this.address ="http://"+host+"/";
+                        break;
+                    }
                 }
-            }
-            catch (Exception e)
-            {
+                catch (Exception e)
+                {
+                    System.out.println("penis");
+                }
 
             }
         }
-        return null;
+        public String getdAdress()
+        {
+            return this.address;
+        }
+    }
+    public static void main(String[] args)
+    {
+        HostResolver h=new HostResolver();
+        System.out.println(h.findHost());
+    }
+    public String findHost()
+    {
+
+        AddressGetter addressGetter = new AddressGetter();
+        addressGetter.start();
+        try {
+            addressGetter.join();
+        }
+        catch (Exception e)
+        {
+
+        }
+        return addressGetter.getdAdress();
     }
 
 }
