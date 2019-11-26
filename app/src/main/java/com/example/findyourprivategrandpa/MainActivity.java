@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
         String hostUrl= new HostResolver().findHost();
         Log.d("host", "onCreate: "+hostUrl);
         downloadImageTask.execute((hostUrl+"lord_of_the_quiz_backend/chadDaniels.jpg"));
+        new FileDownloader().download();
 
     }
 }
