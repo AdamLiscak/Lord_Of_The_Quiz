@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
                 pb.addEntry("to","Jenny");
                 pb.addEntry("from","Bacock");
                 String data=pb.getRequests();
-               StringPoster stringPoster =new StringPoster(hostUrl+"testing/index.php",data);
+               StringPoster stringPoster =new StringPoster(hostUrl+"lord_of_the_quiz_backend/testing/index.php",data);
                stringPoster.post();
 
     }
