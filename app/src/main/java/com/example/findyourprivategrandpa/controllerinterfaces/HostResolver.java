@@ -1,4 +1,6 @@
-package com.example.findyourprivategrandpa.ControllerInterfaces;
+package com.example.findyourprivategrandpa.controllerinterfaces;
+import android.util.Log;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 public class HostResolver
@@ -26,7 +28,7 @@ public class HostResolver
                 }
                 catch (Exception e)
                 {
-                    System.out.println("penis");
+                    Log.d("NoNetwork", "run: ");
                 }
 
             }

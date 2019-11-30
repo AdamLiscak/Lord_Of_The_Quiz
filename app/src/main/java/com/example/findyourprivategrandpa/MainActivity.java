@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.example.findyourprivategrandpa.ControllerInterfaces.DownloadImageTask;
-import com.example.findyourprivategrandpa.ControllerInterfaces.FileStringifier;
-import com.example.findyourprivategrandpa.ControllerInterfaces.HostResolver;
+import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
+import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifier;
+import com.example.findyourprivategrandpa.controllerinterfaces.HostResolver;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequestBuilder;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.StringPoster;
 
 import org.json.JSONObject;
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity
         Bitmap bmp;
         ImageView imageView=findViewById(R.id.imageView);
         DownloadImageTask downloadImageTask=new DownloadImageTask(imageView);
-        String hostUrl= new HostResolver().findHost();
+        final  String hostUrl= new HostResolver().findHost();
         Log.d("host", "onCreate: "+hostUrl);
         downloadImageTask.execute((hostUrl+"lord_of_the_quiz_backend/chadDaniels.jpg"));
         String json=new FileStringifier(hostUrl+"lord_of_the_quiz_backend/grandpa.json").stringify();
@@ -37,10 +39,15 @@ public class MainActivity extends AppCompatActivity
         catch (Exception e)
         {
         }
-        Log.d("penis cock create", "onCreate: "+name);
+        Log.d("penis ster create", "onCreate: "+name);
 
 
-
+                PostRequestBuilder pb=new PostRequestBuilder();
+                pb.addEntry("to","Jenny");
+                pb.addEntry("from","Bacock");
+                String data=pb.getRequests();
+               StringPoster stringPoster =new StringPoster(hostUrl+"testing/index.php",data);
+               stringPoster.post();
 
     }
 }
