@@ -14,11 +14,11 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 
-public class StringPoster
+public class AsyncRequest
 {
     private String urlAddress;
     private String params;
-    public StringPoster(String urlAddress, String params)
+    public AsyncRequest(String urlAddress, String params)
     {
         this.urlAddress=urlAddress;
         this.params = params;
@@ -45,6 +45,7 @@ public class StringPoster
 
                 http.setFixedLengthStreamingMode(length);
                 http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                http.connect();
 
                 BufferedOutputStream os= new BufferedOutputStream(http.getOutputStream());
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -54,16 +55,49 @@ public class StringPoster
                 os.close();
 
                 http.connect();
+                setText(http);
 
             }
             catch (Exception e)
             {
 
             }
+
+        }
+       public void setText(HttpURLConnection connection) throws Exception {
+            //add headers to the connection, or check the status if desired..
+
+            // handle error response code it occurs
+            int responseCode = connection.getResponseCode();
+            InputStream inputStream;
+            if (200 <= responseCode && responseCode <= 299) {
+                inputStream = connection.getInputStream();
+            } else {
+                inputStream = connection.getErrorStream();
+            }
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            inputStream));
+
+            StringBuilder response = new StringBuilder();
+            String currentLine;
+
+            while ((currentLine = in.readLine()) != null)
+                response.append(currentLine);
+
+            in.close();
+
+            text=response.toString();
+        }
+
+        public String getText() {
+            return text;
         }
     }
-    public void post()
+    public String getResponse()
     {
+        String reponse="";
         Worker worker= new Worker();
         worker.start();
         try {
@@ -73,6 +107,8 @@ public class StringPoster
         {
 
         }
+        reponse=worker.getText();
+        return reponse;
 
     }
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifier;
 import com.example.findyourprivategrandpa.controllerinterfaces.HostResolver;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.AsyncRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequestBuilder;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.StringPoster;
 
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity
                 String data=pb.getRequests();
                StringPoster stringPoster =new StringPoster(hostUrl+"lord_of_the_quiz_backend/testing/index.php",data);
                stringPoster.post();
+                AsyncRequest asr=new AsyncRequest(hostUrl+"lord_of_the_quiz_backend/testing/index.php",data);
+        Log.d("Response Cock", "onCreate: "+asr.getResponse());
 
     }
 }
