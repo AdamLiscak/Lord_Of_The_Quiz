@@ -12,6 +12,8 @@ import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import static com.example.findyourprivategrandpa.Urls.EXPORT_URL;
 import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZ_URL;
@@ -21,7 +23,10 @@ public class Quiz
 {
     private Bitmap thumbnail;
     private final String name;
+    private String author;
     private Question[] questions;
+    private HashMap<User,Integer> highscores;
+    private int[] myScores;
     private int index=0;
     private int points=0;
     private int id;
@@ -41,6 +46,7 @@ public class Quiz
         JSONObject jsonObject;
         jsonObject=new JSONObject(stringJson);
         this.id=id;
+        author=jsonObject.getString("author");
         name=jsonObject.getString("name");
         JSONArray jsonQuestions= jsonObject.getJSONArray("questions");
         int length=jsonQuestions.length();
@@ -102,7 +108,7 @@ public class Quiz
     @NonNull
     @Override
     public String toString() {
-        StringBuilder sb=new StringBuilder("name: ").append(name).append("\nid: ").append(id);
+        StringBuilder sb=new StringBuilder("name: ").append(name).append("\nauthor: ").append(author).append("\nid: ").append(id);
         for(Question question: questions)
         {
             sb.append("\nquestion: ").append(question.getName());
