@@ -7,11 +7,15 @@ import androidx.annotation.NonNull;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageFetcher;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static com.example.findyourprivategrandpa.Urls.EXPORT_URL;
 import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
+import static com.example.findyourprivategrandpa.Urls.QUIZ_URL;
+import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
 
 public class Quiz
 {
@@ -28,15 +32,15 @@ public class Quiz
         this.id=id;
         this.questions=questions;
     }
-    public Quiz (String url, int id) throws Exception
+    public Quiz (int id) throws Exception
     {
         PostMessageBuilder pb= new PostMessageBuilder();
         pb.addEntry("id",""+id);
-        BidirectionalRequest br=new BidirectionalRequest(url,pb.getValues());
+        BidirectionalRequest br=new BidirectionalRequest(QUIZ_URL,pb.getValues());
         String stringJson=br.getResponse();
         JSONObject jsonObject;
         jsonObject=new JSONObject(stringJson);
-        id=jsonObject.getInt("id");
+        this.id=id;
         name=jsonObject.getString("name");
         JSONArray jsonQuestions= jsonObject.getJSONArray("questions");
         int length=jsonQuestions.length();
@@ -47,10 +51,6 @@ public class Quiz
             Question question= new Question(jsonQuestion);
             questions[i]=question;
         }
-    }
-    public Quiz(String name)
-    {
-        this.name=name;
     }
     public Question getQuestion()
     {
@@ -71,23 +71,29 @@ public class Quiz
         ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
         questions[index].setPicture(imageFetcher.getImage());
     }
-    public JSONObject getJson()
+    public void export()
     {
-        JSONObject jsonObject=new JSONObject();
-        try {
-            jsonObject.put("id",id);
-            jsonObject.put("points",points);
-        }
-        catch (Exception e)
-        {
+        PostMessageBuilder pm=new PostMessageBuilder();
+        pm.addEntry("quiz_id",""+questions[index].getId());
+        PostRequest pr= new PostRequest(EXPORT_URL,pm.getValues());
+    }
+    public void setThumbnail()
+    {
+        PostMessageBuilder pm=new PostMessageBuilder();
+        pm.addEntry("quiz_id",""+questions[index].getId());
+        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL,pm.getValues());
+        this.thumbnail=imageFetcher.getImage();
+    }
+    public void removeThumbnail()
+    {
+        this.thumbnail=null;
+    }
 
-        }
-        return jsonObject;
+    public Bitmap getThumbnail() {
+        return thumbnail;
     }
-    public void setThumbnail(Bitmap bmp)
-    {
-        this.thumbnail=bmp;
-    }
+
+
     public void setQuestions(Question[] questions)
     {
         this.questions=questions;

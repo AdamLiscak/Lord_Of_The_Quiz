@@ -7,4 +7,6 @@ public class Urls {
     public static final String QUESTION_IMAGE_URL = HOST_URL +"lord_of_the_quiz_backend/chadDaniels.jpg";
     public static final String THUMBNAIL_URL = HOST_URL +"lord_of_the_quiz_backend/chadDaniels.jpg";
     public static final String MOCKUP_URL = HOST_URL +"lord_of_the_quiz_backend/testing/mockup/mockup.php";
+    public static final String QUIZ_URL = HOST_URL + "lord_of_the_quiz_backend/testing/mockup/mockup.php";
+    public static final String EXPORT_URL = HOST_URL + "lord_of_the_quiz_backend/testing/mockup/mockup.php";
 }

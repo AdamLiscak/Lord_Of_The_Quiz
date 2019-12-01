@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         Log.d("Response Cock", "onCreate: "+asr.getResponse());
         try
         {
-            Quiz quiz = new Quiz(HOST_URL + "lord_of_the_quiz_backend/testing/mockup/mockup.php", 0);
+            Quiz quiz = new Quiz(0);
             quiz.start();
             Log.d("Quiz succesful", "onCreate: "+quiz.toString());
         }
