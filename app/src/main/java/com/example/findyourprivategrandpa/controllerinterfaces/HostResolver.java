@@ -54,11 +54,11 @@ public class HostResolver
                 try
                 {
 
-                    String host=MainActivity.getIp()+"."+i;
+                    String host=MainActivity.getIp()+ "."+i;
                     System.out.println(host);
                     URL url = new URL("http://" + host);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setConnectTimeout(100);
+                    connection.setConnectTimeout(500);
                     connection.setRequestMethod("HEAD");
                     int responseCode = connection.getResponseCode();
                     if (responseCode == 200)
