@@ -15,7 +15,7 @@ public class HostResolver
      */
     private class AddressGetter extends Thread
     {
-        private final String[] hosts={"adislav-pc","bacosck"};
+        private final String[] hosts={"adislav-pc","bacock"};
         String address;
         @Override
         public void run()
