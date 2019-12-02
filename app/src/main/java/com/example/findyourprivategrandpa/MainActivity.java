@@ -2,10 +2,15 @@ package com.example.findyourprivategrandpa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.findyourprivategrandpa.Models.Quiz;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
@@ -20,10 +25,14 @@ import static com.example.findyourprivategrandpa.Urls.HOST_URL;
 
 public class MainActivity extends AppCompatActivity
 {
-
+    private static String ip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WifiManager wifiMan = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInf = wifiMan.getConnectionInfo();
+        int ipAddress = wifiInf.getIpAddress();
+        ip = String.format("%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff));
         setContentView(R.layout.activity_main);
         Bitmap bmp;
         ImageView imageView=findViewById(R.id.imageView);
@@ -63,5 +72,12 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d("Quiz unsuccesful", "onCreate: "+e.toString());
         }
+        Toast toast= Toast.makeText(getApplicationContext(),ip,Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
+    public static String getIp()
+    {
+        return ip;
     }
 }

@@ -12,6 +12,7 @@ import java.util.HashMap;
 import static com.example.findyourprivategrandpa.Urls.HIGH_SCORES_BY_QUIZ_URL;
 import static com.example.findyourprivategrandpa.Urls.HIGH_SCORES_BY_USER_URL;
 import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
+import static com.example.findyourprivategrandpa.Urls.USER_QUIZES_URL;
 
 public class User {
     private int id;
@@ -23,10 +24,10 @@ public class User {
         this.id=id;
         this.name=name;
     }
-    public void setHighScores() throws Exception
+    public void pullHighScores() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("quiz_id",""+id);
+        pm.addEntry("id",""+id);
         BidirectionalRequest br= new BidirectionalRequest(HIGH_SCORES_BY_QUIZ_URL,pm.getValues());
         JSONObject jsonObject = new JSONObject(br.getResponse());
         JSONArray jsonScores= jsonObject.getJSONArray("scores");
@@ -37,9 +38,18 @@ public class User {
             highScores.put(quiz,scoreTuple.getInt("score"));
         }
     }
-    private void setAuthoredQuizzes()
+    private void pullAuthoredQuizzes() throws Exception
     {
-
-
+        PostMessageBuilder pm=new PostMessageBuilder();
+        pm.addEntry("id",""+id);
+        BidirectionalRequest br= new BidirectionalRequest(USER_QUIZES_URL,pm.getValues());
+        JSONObject jsonObject = new JSONObject(br.getResponse());
+        JSONArray jsonScores= jsonObject.getJSONArray("scores");
+        for (int i=0;i<jsonScores.length();i++)
+        {
+            JSONObject scoreTuple=jsonScores.getJSONObject(i);
+            Quiz quiz=new Quiz(scoreTuple.getInt("id"),scoreTuple.getString("name"));
+            highScores.put(quiz,scoreTuple.getInt("score"));
+        }
     }
 }

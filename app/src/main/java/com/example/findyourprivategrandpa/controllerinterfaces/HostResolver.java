@@ -1,5 +1,10 @@
 package com.example.findyourprivategrandpa.controllerinterfaces;
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
+
+import com.example.findyourprivategrandpa.MainActivity;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,10 +15,14 @@ public class HostResolver
      */
     private class AddressGetter extends Thread
     {
-        private final String[] hosts={"adislav-pc","bacock","osboxes"};
+        private final String[] hosts={"adislav-pc","bacosck"};
         String address;
         @Override
         public void run()
+        {
+            getNetwork();
+        }
+        public void getNetwork()
         {
             for (String host: hosts) {
                 try
@@ -21,17 +30,47 @@ public class HostResolver
 
                     URL url = new URL("http://" + host);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setConnectTimeout(100);
                     connection.setRequestMethod("HEAD");
                     int responseCode = connection.getResponseCode();
                     if (responseCode == 200)
                     {
                         this.address ="http://"+host+"/";
-                        break;
+                        return;
                     }
+
                 }
                 catch (Exception e)
                 {
-                    Log.d("NoNetwork", "run: ");
+                    System.out.println("penis");
+                }
+
+            }
+            getNetworkByIp();
+        }
+        public void getNetworkByIp()
+        {
+            for (int i=0;i<255;i++) {
+                try
+                {
+
+                    String host=MainActivity.getIp()+"."+i;
+                    System.out.println(host);
+                    URL url = new URL("http://" + host);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setConnectTimeout(100);
+                    connection.setRequestMethod("HEAD");
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == 200)
+                    {
+                        this.address ="http://"+host+"/";
+                        return;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    System.out.println("penis");
                 }
 
             }
