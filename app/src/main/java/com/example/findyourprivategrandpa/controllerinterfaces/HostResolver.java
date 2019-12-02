@@ -30,7 +30,7 @@ public class HostResolver
 
                     URL url = new URL("http://" + host);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setConnectTimeout(100);
+                    connection.setConnectTimeout(500);
                     connection.setRequestMethod("HEAD");
                     int responseCode = connection.getResponseCode();
                     if (responseCode == 200)
