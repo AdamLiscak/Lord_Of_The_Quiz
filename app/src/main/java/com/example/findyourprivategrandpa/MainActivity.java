@@ -18,21 +18,25 @@ import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifi
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequest;
+import com.example.findyourprivategrandpa.localStorage.FileParser;
+import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONObject;
 
+import java.io.File;
+
 import static com.example.findyourprivategrandpa.Urls.HOST_URL;
+import static com.example.findyourprivategrandpa.localStorage.LocalStorage.setConfig;
 
 public class MainActivity extends AppCompatActivity
 {
     private static String ip;
+    private static File rootDataDir;
+    private static File localStorage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        WifiManager wifiMan = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInf = wifiMan.getConnectionInfo();
-        int ipAddress = wifiInf.getIpAddress();
-        ip = String.format("%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff));
+        initiateVars();
         setContentView(R.layout.activity_main);
         Bitmap bmp;
         ImageView imageView=findViewById(R.id.imageView);
@@ -76,8 +80,47 @@ public class MainActivity extends AppCompatActivity
         toast.show();
 
     }
+    public void initiateVars()
+    {
+        WifiManager wifiMan = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInf = wifiMan.getConnectionInfo();
+        int ipAddress = wifiInf.getIpAddress();
+        ip = String.format("%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff));
+        rootDataDir = getApplication().getFilesDir();
+        localStorage = new File(rootDataDir.toString()+"/localStorage.json");
+        if (!localStorage.exists()) {
+            try {
+                localStorage.createNewFile();
+                FileParser.write(localStorage,"{}");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d("initiatievars", "initiateVars: "+FileParser.read(localStorage));
+
+       LocalStorage.initiate();
+     // LocalStorage.changeProperty("penis","small");
+
+            Log.d("cockvars", "initiateVars: " + LocalStorage.getConfiguration().toString());
+    }
     public static String getIp()
     {
         return ip;
+    }
+
+    public static File getLocalStorage()
+    {
+        return localStorage;
+    }
+    public static void setLocalStorage(File localStorage)
+    {
+        MainActivity.localStorage = localStorage;
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        setConfig();
     }
 }
