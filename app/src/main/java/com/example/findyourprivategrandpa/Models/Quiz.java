@@ -8,6 +8,7 @@ import com.example.findyourprivategrandpa.controllerinterfaces.post.Bidirectiona
 import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageFetcher;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequest;
+import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import static com.example.findyourprivategrandpa.Urls.EXPORT_URL;
 import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZ_URL;
 import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
+import static com.example.findyourprivategrandpa.localStorage.LocalStorage.getProperty;
 
 public class Quiz
 {

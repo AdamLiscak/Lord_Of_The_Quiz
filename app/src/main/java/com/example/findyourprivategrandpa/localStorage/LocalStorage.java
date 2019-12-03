@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.findyourprivategrandpa.MainActivity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class LocalStorage
@@ -25,11 +26,10 @@ public class LocalStorage
     {
         FileParser.write(MainActivity.getLocalStorage(),config.toString());
     }
-    public static void changeProperty(String key, String value)
+    public static void changeProperty(String key, Object value)
     {
         try
         {
-            config.remove(key);
             config.put(key,value);
         }
         catch (Exception e)
@@ -42,6 +42,58 @@ public class LocalStorage
         try
         {
             return config.get(key);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static JSONObject getJSON(String key)
+    {
+        try
+        {
+            return config.getJSONObject(key);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static JSONObject removeJSON(String key)
+    {
+        try
+        {
+            JSONObject jsonObject=config.getJSONObject(key);
+            config.remove(key);
+            return jsonObject;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static String removeString(String key)
+    {
+        try
+        {
+            String jsonObject=config.getString(key);
+            config.remove(key);
+            return jsonObject;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static JSONArray getJSONArray(String key)
+    {
+        try
+        {
+            return config.getJSONArray(key);
         }
         catch (Exception e)
         {

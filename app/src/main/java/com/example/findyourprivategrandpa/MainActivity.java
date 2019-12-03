@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity
 {
     private static String ip;
     private static File rootDataDir;
-    private static File localStorage;
+    private static File localStorage;;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

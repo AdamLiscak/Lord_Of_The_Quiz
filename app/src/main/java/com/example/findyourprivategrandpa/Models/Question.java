@@ -3,6 +3,7 @@ package com.example.findyourprivategrandpa.Models;
 import android.graphics.Bitmap;
 
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
+import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
