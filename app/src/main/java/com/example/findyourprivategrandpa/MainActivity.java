@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -26,7 +25,7 @@ import org.json.JSONObject;
 import java.io.File;
 
 import static com.example.findyourprivategrandpa.Urls.HOST_URL;
-import static com.example.findyourprivategrandpa.localStorage.LocalStorage.setConfig;
+import static com.example.findyourprivategrandpa.localStorage.LocalStorage.commit;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -122,6 +121,6 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        setConfig();
+        commit();
     }
 }

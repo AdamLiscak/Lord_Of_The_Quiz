@@ -22,7 +22,7 @@ public class LocalStorage
             Log.d("ConfigShit", "getConfig: "+e.toString());
         }
     }
-    public static void setConfig()
+    public static void commit()
     {
         FileParser.write(MainActivity.getLocalStorage(),config.toString());
     }

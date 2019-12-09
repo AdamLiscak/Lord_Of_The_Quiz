@@ -1,7 +1,4 @@
 package com.example.findyourprivategrandpa.controllerinterfaces;
-import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import com.example.findyourprivategrandpa.MainActivity;
@@ -10,7 +7,7 @@ import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.example.findyourprivategrandpa.localStorage.LocalStorage.setConfig;
+import static com.example.findyourprivategrandpa.localStorage.LocalStorage.commit;
 
 public class HostResolver
 {
@@ -99,7 +96,7 @@ public class HostResolver
                     if (responseCode == 200)
                     {
                         LocalStorage.changeProperty("ip",MainActivity.getIp()+"."+i);
-                        setConfig();
+                        commit();
                         this.address ="http://"+host+"/";
                         return;
                     }

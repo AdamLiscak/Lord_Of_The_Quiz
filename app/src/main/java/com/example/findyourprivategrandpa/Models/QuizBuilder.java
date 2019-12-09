@@ -1,5 +1,7 @@
 package com.example.findyourprivategrandpa.Models;
 
+import android.graphics.Bitmap;
+
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONArray;
@@ -8,22 +10,84 @@ import org.json.JSONObject;
 public class QuizBuilder
 {
     private String name;
-    private Question[] questions;
+    private String thumbnail;
+    private JSONArray questions;
     private JSONObject quiz;
     public QuizBuilder() throws Exception
     {
         JSONObject jsonObject;
         jsonObject=LocalStorage.getJSONObject("quiz");
         name=jsonObject.getString("name");
-        JSONArray jsonQuestions= jsonObject.getJSONArray("questions");
-        int length=jsonQuestions.length();
-        questions=new Question[length];
-        for(int i=0;i<length;i++)
-        {
-            JSONObject jsonQuestion=(JSONObject)jsonQuestions.get(i);
-            Question question= new Question(jsonQuestion);
-            questions[i]=question;
-        }
-
+        thumbnail=jsonObject.getString("thumbnail");
+        questions = jsonObject.getJSONArray("questions");
     }
+    public void addThumbnail(String thumbnail)
+    {
+        this.thumbnail=thumbnail;
+    }
+    public void setName(String name)
+    {
+        this.name=name;
+        LocalStorage.commit();
+    }
+    public void newQuestion(String name)
+    {
+        this.questions.put(new JSONObject());
+    }
+    public void editQuestionName(String name, int index)
+    {
+        try
+        {
+            JSONObject question = questions.getJSONObject(index);
+            question.put("name",name);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        LocalStorage.commit();
+    }
+    public void editAnswerName(String name, int questionIndex, int answerIndex)
+    {
+        try
+        {
+            JSONObject question = this.questions.getJSONObject(questionIndex);
+            JSONArray answers=question.getJSONArray("answers");
+            answers.put(answerIndex,name);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        LocalStorage.commit();
+    }
+    public void newAnswer(String name, int questionIndex)
+    {
+
+        try
+        {
+            JSONObject question = this.questions.getJSONObject(questionIndex);
+            JSONArray answers=question.getJSONArray("answers");
+            answers.put(name);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        LocalStorage.commit();
+    }
+    public void addCorrectAnswer(int questionIndex,int answerIndex)
+    {
+        try
+        {
+            JSONObject question = this.questions.getJSONObject(questionIndex);
+            question.put("correctAnswer",answerIndex);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        LocalStorage.commit();
+    }
+
 }
