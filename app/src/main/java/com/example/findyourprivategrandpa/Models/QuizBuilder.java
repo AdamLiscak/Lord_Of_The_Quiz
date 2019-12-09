@@ -23,11 +23,27 @@ public class QuizBuilder
     }
     public void addThumbnail(String thumbnail)
     {
-        this.thumbnail=thumbnail;
+
+        try
+        {
+            this.quiz.put("thumbnail", thumbnail);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        LocalStorage.commit();
     }
     public void setName(String name)
     {
-        this.name=name;
+        try
+        {
+            this.quiz.put("name", name);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         LocalStorage.commit();
     }
     public void newQuestion(String name)
@@ -69,6 +85,20 @@ public class QuizBuilder
             JSONObject question = this.questions.getJSONObject(questionIndex);
             JSONArray answers=question.getJSONArray("answers");
             answers.put(name);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        LocalStorage.commit();
+    }
+    public void editQuestionThumbnail(String thumbnail, int questionIndex)
+    {
+
+        try
+        {
+            JSONObject question = this.questions.getJSONObject(questionIndex);
+            question.put("picture",thumbnail);
         }
         catch(Exception e)
         {
