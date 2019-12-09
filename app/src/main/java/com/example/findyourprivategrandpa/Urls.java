@@ -16,4 +16,9 @@ public class Urls
     public static final String MY_QUIZES_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/myquizes.php";
     public static final String USER_QUIZES_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/userquizes.php";
     public static final String QUIZ_BUILDER_EXPORT_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/userquizes.php";
+    public static final String LOGIN_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/login.php";
+    public static final String REGISTER_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/register.php";
+    public static final String LOGOUT_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/logout.php";
+    public static final String DELETE_ACCOUNT_URL=HOST_URL+"lord_of_the_quiz_backend/testing/mockup/delete-account.php";
+
 }

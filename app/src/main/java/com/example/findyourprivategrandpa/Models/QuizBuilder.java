@@ -127,8 +127,17 @@ public class QuizBuilder
     public void export()
     {
         PostMessageBuilder pm=new PostMessageBuilder();
+        try
+        {
+            quiz.put("username", LocalStorage.getString("username"));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         pm.addEntry("quiz",""+LocalStorage.getString("quiz"));
         BidirectionalRequest br= new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL,pm.getValues());
+        LocalStorage.removeString("quiz");
     }
 
 }

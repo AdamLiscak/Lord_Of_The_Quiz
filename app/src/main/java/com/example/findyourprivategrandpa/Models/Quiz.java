@@ -48,6 +48,7 @@ public class Quiz
         this.id=id;
         PostMessageBuilder pb= new PostMessageBuilder();
         pb.addEntry("id",""+id);
+        pb.addEntry("username",LocalStorage.getString("username"));
         BidirectionalRequest br=new BidirectionalRequest(QUIZ_URL,pb.getValues());
         String stringJson=br.getResponse();
         JSONObject jsonObject;
@@ -68,6 +69,7 @@ public class Quiz
     {
         PostMessageBuilder pb= new PostMessageBuilder();
         pb.addEntry("id",""+id);
+        pb.addEntry("username",LocalStorage.getString("username"));
         BidirectionalRequest br=new BidirectionalRequest(QUIZ_URL,pb.getValues());
         String stringJson=br.getResponse();
         JSONObject jsonObject;

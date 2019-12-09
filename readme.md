@@ -48,6 +48,22 @@ lädt den Quiz vom Benutzer, den der Benutzer erstellt.
 
 lädt einige Highschores vom Benutzer.
 
+### boolean login(username,password)
+
+loggt den user mit username und password ein. Und gibt zurück ob der login erfolgreich war.
+
+### boolean register(username,password)
+
+registriert den benutzer und gibt einen boolean zurück, ob dies erfolgreich war
+
+### boolean logout()
+
+naja ihr wisst schon
+
+### boolean deleteAccount()
+
+klar oder ?
+
 ## public class Question
 
 scheißt auf die Klasse, ist für euch nicht wichtig.
