@@ -22,6 +22,17 @@ public class LocalStorage
             Log.d("ConfigShit", "getConfig: "+e.toString());
         }
     }
+    public static String getString(String key)
+    {
+        try
+        {
+            return config.getString(key);
+        }
+        catch (Exception e)
+        {
+        }
+        return null;
+    }
     public static void commit()
     {
         FileParser.write(MainActivity.getLocalStorage(),config.toString());

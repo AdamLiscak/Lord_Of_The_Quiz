@@ -2,10 +2,15 @@ package com.example.findyourprivategrandpa.Models;
 
 import android.graphics.Bitmap;
 
+import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static com.example.findyourprivategrandpa.Urls.QUIZ_BUILDER_EXPORT_URL;
+import static com.example.findyourprivategrandpa.Urls.USER_QUIZES_URL;
 
 public class QuizBuilder
 {
@@ -118,6 +123,12 @@ public class QuizBuilder
             e.printStackTrace();
         }
         LocalStorage.commit();
+    }
+    public void export()
+    {
+        PostMessageBuilder pm=new PostMessageBuilder();
+        pm.addEntry("quiz",""+LocalStorage.getString("quiz"));
+        BidirectionalRequest br= new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL,pm.getValues());
     }
 
 }

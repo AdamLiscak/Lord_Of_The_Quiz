@@ -46,6 +46,7 @@ public class Me
     public void loadMyHighScores() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
+
         BidirectionalRequest br= new BidirectionalRequest(MY_SCORES_URL,pm.getValues());
         JSONObject jsonObject = new JSONObject(br.getResponse());
         JSONArray jsonScores= jsonObject.getJSONArray("scores");
