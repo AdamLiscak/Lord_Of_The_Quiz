@@ -49,7 +49,7 @@ public class LocalStorage
         }
         return null;
     }
-    public static JSONObject getJSON(String key)
+    public static JSONObject getJSONObject(String key)
     {
         try
         {

@@ -19,7 +19,6 @@ import static com.example.findyourprivategrandpa.Urls.EXPORT_URL;
 import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZ_URL;
 import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
-import static com.example.findyourprivategrandpa.localStorage.LocalStorage.getProperty;
 
 public class Quiz
 {

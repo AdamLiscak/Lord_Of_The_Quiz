@@ -1,56 +1,61 @@
 package com.example.findyourprivategrandpa.Models;
 
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
-import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageFetcher;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 
-import static com.example.findyourprivategrandpa.Urls.HIGH_SCORES_BY_QUIZ_URL;
-import static com.example.findyourprivategrandpa.Urls.HIGH_SCORES_BY_USER_URL;
-import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
+import static com.example.findyourprivategrandpa.Urls.MY_QUIZES_URL;
+import static com.example.findyourprivategrandpa.Urls.MY_SCORES_URL;
 import static com.example.findyourprivategrandpa.Urls.USER_QUIZES_URL;
 
-public class User {
-    private int id;
-    private String name;
-    private HashMap<Quiz,Integer> highScores;
-    private Quiz[] authoredQuizzes;
-    public User(String name, int id)
-    {
-        this.id=id;
-        this.name=name;
-    }
-    public void pullHighScores() throws Exception
+public class Me
+{
+    private HashMap<Quiz,Integer> myHighScores;
+    private Quiz[] myQuizes;
+    private QuizBuilder currentlyEdited;
+    public void loadMyQuizes() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("id",""+id);
-        BidirectionalRequest br= new BidirectionalRequest(HIGH_SCORES_BY_QUIZ_URL,pm.getValues());
+        BidirectionalRequest br= new BidirectionalRequest(MY_QUIZES_URL,pm.getValues());
         JSONObject jsonObject = new JSONObject(br.getResponse());
-        JSONArray jsonScores= jsonObject.getJSONArray("scores");
+        JSONArray jsonScores= jsonObject.getJSONArray("quizes");
+        int size=jsonScores.length();
+        myQuizes=new Quiz[size];
         for (int i=0;i<jsonScores.length();i++)
         {
             JSONObject scoreTuple=jsonScores.getJSONObject(i);
             Quiz quiz=new Quiz(scoreTuple.getInt("id"),scoreTuple.getString("name"));
-            highScores.put(quiz,scoreTuple.getInt("score"));
+            myQuizes[i]=quiz;
         }
     }
-    private void pullAuthoredQuizzes() throws Exception
+    public void loadCurrentlyEdited()
+    {
+        try
+        {
+            this.currentlyEdited = new QuizBuilder();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void loadMyHighScores() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("id",""+id);
-        BidirectionalRequest br= new BidirectionalRequest(USER_QUIZES_URL,pm.getValues());
+        BidirectionalRequest br= new BidirectionalRequest(MY_SCORES_URL,pm.getValues());
         JSONObject jsonObject = new JSONObject(br.getResponse());
         JSONArray jsonScores= jsonObject.getJSONArray("scores");
+        int size=jsonScores.length();
+        myQuizes=new Quiz[size];
         for (int i=0;i<jsonScores.length();i++)
         {
             JSONObject scoreTuple=jsonScores.getJSONObject(i);
             Quiz quiz=new Quiz(scoreTuple.getInt("id"),scoreTuple.getString("name"));
-            highScores.put(quiz,scoreTuple.getInt("score"));
+            myHighScores.put(quiz,scoreTuple.getInt("quiz"));
         }
     }
 }
