@@ -15,6 +15,7 @@ import com.example.findyourprivategrandpa.Models.Quiz;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifier;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageUploader;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequest;
 import com.example.findyourprivategrandpa.localStorage.FileParser;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.io.File;
 
 import static com.example.findyourprivategrandpa.Urls.HOST_URL;
+import static com.example.findyourprivategrandpa.Urls.MOCKUP_URL;
 import static com.example.findyourprivategrandpa.localStorage.LocalStorage.commit;
 
 public class MainActivity extends AppCompatActivity
@@ -100,8 +102,16 @@ public class MainActivity extends AppCompatActivity
 
        LocalStorage.initiate();
      // LocalStorage.changeProperty("penis","small");
-
+        if(LocalStorage.getConfiguration()!=null)
+        {
             Log.d("cockvars", "initiateVars: " + LocalStorage.getConfiguration().toString());
+        }
+        else
+        {
+            FileParser.write(localStorage,"{}");
+        }
+       ImageUploader iu= new ImageUploader("/storage/emulated/0/DCIM/100ANDRO/DSC_0001.JPG",MOCKUP_URL,"cock");
+       iu.uploadImage();
     }
     public static String getIp()
     {
@@ -121,6 +131,5 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        commit();
     }
 }

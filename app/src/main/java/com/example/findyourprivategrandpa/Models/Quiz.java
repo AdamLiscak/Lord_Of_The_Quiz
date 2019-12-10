@@ -64,6 +64,11 @@ public class Quiz
             Question question= new Question(jsonQuestion);
             questions[i]=question;
         }
+        PostMessageBuilder pm= new PostMessageBuilder();
+        pm.addEntry("username",LocalStorage.getString("username"));
+        pb.addEntry("id",""+id);
+        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL,pm.getValues());
+       this.thumbnail=imageFetcher.getImage();
     }
     public void downloadQuiz() throws Exception
     {
@@ -84,6 +89,11 @@ public class Quiz
             Question question= new Question(jsonQuestion);
             questions[i]=question;
         }
+        PostMessageBuilder pm= new PostMessageBuilder();
+        pm.addEntry("username",LocalStorage.getString("username"));
+        pm.addEntry("id",""+id);
+        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL,pm.getValues());
+        this.thumbnail=imageFetcher.getImage();
     }
     public Question getQuestion()
     {
@@ -91,7 +101,10 @@ public class Quiz
     }
     public void start()
     {
-        ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,"cock");
+        PostMessageBuilder pm= new PostMessageBuilder();
+        pm.addEntry("username",LocalStorage.getString("username"));
+        pm.addEntry("qID",""+questions[index].getId());
+        ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
         questions[index].setPicture(imageFetcher.getImage());
     }
     public void nextQuestion()
@@ -100,7 +113,9 @@ public class Quiz
         questions[index].setPicture(null);
         index++;
         PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("id",""+questions[index].getId());
+        pm.addEntry("username",LocalStorage.getString("username"));
+        pm.addEntry("id",""+id);
+        pm.addEntry("qID",""+questions[index].getId());
         ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
         questions[index].setPicture(imageFetcher.getImage());
     }
@@ -108,7 +123,9 @@ public class Quiz
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("quiz_id",""+questions[index].getId());
+        pm.addEntry("username",LocalStorage.getString("username"));
         PostRequest pr= new PostRequest(EXPORT_URL,pm.getValues());
+        pr.post();
     }
     public void setThumbnail()
     {
@@ -126,6 +143,35 @@ public class Quiz
         return thumbnail;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getAuthor()
+    {
+        return author;
+    }
+
+    public Question[] getQuestions()
+    {
+        return questions;
+    }
+
+    public HashMap<User, Integer> getHighscores()
+    {
+        return highscores;
+    }
+
+    public int[] getMyScores()
+    {
+        return myScores;
+    }
+
+    public int getPoints()
+    {
+        return points;
+    }
 
     public void setQuestions(Question[] questions)
     {

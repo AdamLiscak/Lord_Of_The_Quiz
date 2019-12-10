@@ -3,13 +3,16 @@ package com.example.findyourprivategrandpa.Models;
 import android.graphics.Bitmap;
 
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageUploader;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static com.example.findyourprivategrandpa.Urls.QUESTION_PICTURE_UPLOAD_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZ_BUILDER_EXPORT_URL;
+import static com.example.findyourprivategrandpa.Urls.QUIZ_THUMBNAIL_UPLOAD_URL;
 import static com.example.findyourprivategrandpa.Urls.USER_QUIZES_URL;
 
 public class QuizBuilder
@@ -124,7 +127,7 @@ public class QuizBuilder
         }
         LocalStorage.commit();
     }
-    public void export()
+    public void export() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         try
@@ -137,7 +140,22 @@ public class QuizBuilder
         }
         pm.addEntry("quiz",""+LocalStorage.getString("quiz"));
         BidirectionalRequest br= new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL,pm.getValues());
+        JSONObject response = new JSONObject(br.getResponse());
+        JSONArray qIDs=response.getJSONArray("qIDs");
+        int quizID=response.getInt("quizID");
+        for (int i = 0; i < questions.length() ; i++)
+        {
+            PostMessageBuilder postBuilder = new PostMessageBuilder();
+            postBuilder.addEntry("picture",(String)qIDs.get(i));
+            ImageUploader iu= new ImageUploader(((JSONObject)questions.get(i)).getString("picture"),QUESTION_PICTURE_UPLOAD_URL,postBuilder.getValues());
+            iu.uploadImage();
+        }
+        PostMessageBuilder pb = new PostMessageBuilder();
+        pb.addEntry("thumbnail",""+quizID);
+        ImageUploader iu= new ImageUploader(this.thumbnail,QUIZ_THUMBNAIL_UPLOAD_URL,pb.getValues());
+        iu.uploadImage();
         LocalStorage.removeString("quiz");
+
     }
 
 }
