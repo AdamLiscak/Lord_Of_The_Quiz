@@ -20,7 +20,7 @@ public class User {
     private String name;
     private HashMap<Quiz,Integer> highScores;
     private Quiz[] authoredQuizzes;
-    public User(String name, int id)
+    public User( int id, String name)
     {
         this.id=id;
         this.name=name;
