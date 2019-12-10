@@ -19,6 +19,7 @@ import static com.example.findyourprivategrandpa.Urls.EXPORT_URL;
 import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZ_URL;
 import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
+import static java.lang.Math.pow;
 
 public class Quiz
 {
@@ -31,6 +32,7 @@ public class Quiz
     private int index=0;
     private int points=0;
     private int id;
+    private int streak=0;
     public Quiz(Bitmap thumbnail, String name, int id, Question[] questions)
     {
         this.thumbnail=thumbnail;
@@ -107,9 +109,13 @@ public class Quiz
         ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
         questions[index].setPicture(imageFetcher.getImage());
     }
+    public int multiplyByStreak(int score)
+    {
+        float exponent=1.03f;
+        return (int)pow(exponent,streak)*score;
+    }
     public void nextQuestion()
     {
-        points+=questions[index].getPoints();
         questions[index].setPicture(null);
         index++;
         PostMessageBuilder pm=new PostMessageBuilder();
@@ -127,6 +133,12 @@ public class Quiz
         PostRequest pr= new PostRequest(EXPORT_URL,pm.getValues());
         pr.post();
     }
+
+    public int getStreak()
+    {
+        return streak;
+    }
+
     public void setThumbnail()
     {
         PostMessageBuilder pm=new PostMessageBuilder();
@@ -176,6 +188,20 @@ public class Quiz
     public void setQuestions(Question[] questions)
     {
         this.questions=questions;
+    }
+    public boolean isCorrect(int answerID)
+    {
+        points+=multiplyByStreak(questions[index].getPoints());
+        boolean isCorrect=questions[index].isCorrect(answerID);
+        if(isCorrect)
+        {
+            streak++;
+        }
+        else
+        {
+            streak=0;
+        }
+        return isCorrect;
     }
 
     @NonNull

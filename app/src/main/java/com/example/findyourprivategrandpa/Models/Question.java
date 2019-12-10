@@ -15,9 +15,27 @@ public class Question
     private final String name;
     private final String[] answers;
     private final int correctAnswer;
+    private long tStart;
     private int points;
     private Bitmap picture;
 
+    public void setTStart()
+    {
+        tStart=System.currentTimeMillis();
+    }
+    private long timeElapsed()
+    {
+        return tStart-System.currentTimeMillis();
+    }
+    boolean isCorrect(int answerID)
+    {
+        boolean isCorrect=answerID==correctAnswer;
+        if (isCorrect)
+        {
+            points=1000-(int)timeElapsed()/15;
+        }
+        return isCorrect;
+    }
     public int getCorrectAnswer()
     {
         return correctAnswer;
