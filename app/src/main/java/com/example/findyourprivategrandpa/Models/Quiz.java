@@ -191,8 +191,8 @@ public class Quiz
     }
     public boolean isCorrect(int answerID)
     {
-        points+=multiplyByStreak(questions[index].getPoints());
         boolean isCorrect=questions[index].isCorrect(answerID);
+        points+=multiplyByStreak(questions[index].getPoints());
         if(isCorrect)
         {
             streak++;
