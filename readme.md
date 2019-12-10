@@ -44,7 +44,7 @@ Lädt die Erste Frage , auch mit dem Bild. Vielleicht kommt später weitere Funk
 
 ### quiz.nextQuestion();
 
-Legt den Fokus des Quizzes auf die nächste Frage und summiert die gewonnen Punkte.
+Legt den Fokus des Quizzes auf die nächste Frage.
 
 ### quiz.export();
 
@@ -85,6 +85,10 @@ klar oder ?
 ## public class Question
 
 Die Getter in dieser Klasse werden für euch wichtig sein. Bei unklarheiten kann ich die Dokumentation ergänzen.
+
+### public void setTStart();
+
+setzt die Anfangszeit des Countdowns für die Funktion die die Punkte auswertet. Ihr solltet dies NACH dem Laden der graphischen Elemente einer Question betätigen.
 
 ## public class QuizBuilder
 
