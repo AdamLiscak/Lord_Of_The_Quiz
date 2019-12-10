@@ -51,7 +51,7 @@ public class Quiz
         this.id=id;
         this.name=name;
     }
-    public static void loadQuizzes(int page) throws Exception
+    public static void pullQuizzes(int page) throws Exception
     {
         PostMessageBuilder pb= new PostMessageBuilder();
         pb.addEntry("username",LocalStorage.getString("username"));

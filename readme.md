@@ -10,6 +10,24 @@ Neuen Quiz anlegen:
 
 Holt einen Quiz mit der id "id" aus dem Server.
 
+### Quiz.pullQuizzes() KLASSENMETHODE !!!
+
+Wird NIEMALS über die instanzierung eines Quiz Objektes aufgerufen.
+lädt eine Liste von Quizzes, die von der Datenbank geholt wird. Page gibt an welche ids wir haben wollen. Wenn zum Beispiel page=1... sucht es von 0-19... wenn page=2 sucht es von 20-39.Die Zahl kann auch anders sein.
+
+### boolean quiz.isCorrect(int AnswerID);
+
+Übergibt die ID der ausgewählten Antwort bei der Frage die gerade beantwortet wird, an diese Funktion. Sie wertet die punkte aus, tut sie speichern und tut den Streak erhöhen falls AnswerID richtig ist.
+Zusätzlich ruft diese Methode eine private Funktion, die sich darum kümmert das mit aufsteigendem Streak die Punkte, die man von der Frage erlangt mit einem Faktor 1.03^x
+multipliziert werden. x ist dabei der streak, der erreicht wird.
+
+ 
+### int quiz.getStreak();
+
+
+gibt den Streak ( wie viele Antworten nacheinander ihr richtig beantwortet habt zurück).
+
+
 ### quiz.setThumbnail();
 
 Holt das Hintergrundbild für den Quiz von der DB. Nur Verwenden, wenn die Bilder tatsächlich zu sehen sein sollen. In einer Schleife sollte man nicht mehr als 20 mal diese Methode anwenden...
@@ -66,7 +84,7 @@ klar oder ?
 
 ## public class Question
 
-scheißt auf die Klasse, ist für euch nicht wichtig.
+Die Getter in dieser Klasse werden für euch wichtig sein. Bei unklarheiten kann ich die Dokumentation ergänzen.
 
 ## public class QuizBuilder
 
