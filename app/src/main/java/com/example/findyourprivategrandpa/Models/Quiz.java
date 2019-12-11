@@ -22,7 +22,6 @@ import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZZES_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZ_URL;
 import static com.example.findyourprivategrandpa.Urls.THUMBNAIL_URL;
-import static java.lang.Math.pow;
 
 public class Quiz
 {
@@ -37,6 +36,7 @@ public class Quiz
     private int points=0;
     private int id;
     private int streak=0;
+    private float multiplier = 1f;
 
     public Quiz(Bitmap thumbnail, String name, int id, Question[] questions)
     {
@@ -175,8 +175,7 @@ public class Quiz
     }
     public int multiplyByStreak(int score)
     {
-        float exponent=1.03f;
-        return (int)pow(exponent,streak)*score;
+        return (int)(multiplier *score);
     }
     public void nextQuestion()
     {
@@ -255,10 +254,12 @@ public class Quiz
         if(isCorrect)
         {
             streak++;
+            multiplier *=1.03f;
         }
         else
         {
             streak=0;
+            multiplier =1;
         }
         return isCorrect;
     }

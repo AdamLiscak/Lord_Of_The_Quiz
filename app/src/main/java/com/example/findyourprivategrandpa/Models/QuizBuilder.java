@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageUploader;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
+import com.example.findyourprivategrandpa.localStorage.ImageParser;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import org.json.JSONArray;
@@ -156,6 +157,45 @@ public class QuizBuilder
         iu.uploadImage();
         LocalStorage.removeString("quiz");
 
+    }
+    public JSONObject getQuestionAt(int index)
+    {
+        JSONObject question=null;
+        if(index<questions.length())
+        {
+            try {
+                question = questions.getJSONObject(index);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return question;
+    }
+    public Bitmap getThumbnail()
+    {
+        try {
+            ImageParser ip= new ImageParser(quiz.getString("thumbnail"));
+            return ip.returnImage();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Bitmap getPictureAtQuestion(JSONObject q)
+    {
+        try {
+            ImageParser ip= new ImageParser(q.getString("picture"));
+            return ip.returnImage();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
