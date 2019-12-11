@@ -19,7 +19,7 @@ public class Question
     private int points;
     private Bitmap picture;
 
-    public void setTStart()
+    public void  setTStart()
     {
         tStart=System.currentTimeMillis();
     }
@@ -76,6 +76,10 @@ public class Question
     {
         this.points=points;
     }
+    public int isCorrect() {
+        return points;
+    }
+
     public int getPoints() {
         return points;
     }

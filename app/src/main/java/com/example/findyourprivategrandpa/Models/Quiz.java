@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 import static com.example.findyourprivategrandpa.Urls.EXPORT_URL;
 import static com.example.findyourprivategrandpa.Urls.HIGH_SCORES_BY_QUIZ_URL;
-import static com.example.findyourprivategrandpa.Urls.HIGH_SCORES_BY_USER_URL;
 import static com.example.findyourprivategrandpa.Urls.MY_SCORES_BY_QUIZ_URL;
 import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.Urls.QUIZZES_URL;
@@ -251,7 +250,8 @@ public class Quiz
     public boolean isCorrect(int answerID)
     {
         boolean isCorrect=questions[index].isCorrect(answerID);
-        points+=multiplyByStreak(questions[index].getPoints());
+        questions[index].setPoints(multiplyByStreak(questions[index].getPoints()));
+        points+=questions[index].getPoints();
         if(isCorrect)
         {
             streak++;
