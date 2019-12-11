@@ -27,6 +27,7 @@ import java.io.File;
 
 import static com.example.findyourprivategrandpa.Urls.HOST_URL;
 import static com.example.findyourprivategrandpa.Urls.MOCKUP_URL;
+import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
 import static com.example.findyourprivategrandpa.localStorage.LocalStorage.commit;
 
 public class MainActivity extends AppCompatActivity
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity
         ImageView imageView=findViewById(R.id.imageView);
         DownloadImageTask downloadImageTask=new DownloadImageTask(imageView);
         Log.d("host", "onCreate: "+ HOST_URL);
-        downloadImageTask.execute((HOST_URL +"lord_of_the_quiz_backend/chadDaniels.jpg"));
-        String json=new FileStringifier(HOST_URL +"lord_of_the_quiz_backend/grandpa.json").stringify();
+        downloadImageTask.execute(QUESTION_IMAGE_URL);
+        String json=new FileStringifier(HOST_URL +"lord_of_the_quiz_backend/download/grandpa.json").stringify();
         JSONObject jsonObject=null;
         String name="";
         try
