@@ -139,15 +139,22 @@ public class QuizBuilder
         {
             e.printStackTrace();
         }
-        pm.addEntry("quiz",""+LocalStorage.getString("quiz"));
+        pm.addEntry("quiz",LocalStorage.getString("quiz"));
+        pm.addEntry("userID",LocalStorage.getString("userID"));
         BidirectionalRequest br= new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL,pm.getValues());
-        JSONObject response = new JSONObject(br.getResponse());
-        JSONArray qIDs=response.getJSONArray("qIDs");
-        int quizID=response.getInt("quizID");
+       // JSONObject response = new JSONObject(br.getResponse());
+     //   JSONArray qIDs=response.getJSONArray("qIDs");
+        int quizID=Integer.parseInt(br.getResponse());
+        PostMessageBuilder pBuilder = new PostMessageBuilder();
+        pBuilder.addEntry("quizID",""+quizID);
+        pBuilder.addEntry("picture","-1");
+        ImageUploader iup= new ImageUploader(quiz.getString("thumbnail"),QUESTION_PICTURE_UPLOAD_URL,pBuilder.getValues());
+        iup.uploadImage();
         for (int i = 0; i < questions.length() ; i++)
         {
             PostMessageBuilder postBuilder = new PostMessageBuilder();
-            postBuilder.addEntry("picture",(String)qIDs.get(i));
+            postBuilder.addEntry("quizID",""+quizID);
+            postBuilder.addEntry("picture",""+i);
             ImageUploader iu= new ImageUploader(((JSONObject)questions.get(i)).getString("picture"),QUESTION_PICTURE_UPLOAD_URL,postBuilder.getValues());
             iu.uploadImage();
         }

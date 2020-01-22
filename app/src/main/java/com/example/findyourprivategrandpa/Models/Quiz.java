@@ -188,10 +188,11 @@ public class Quiz
         ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
         questions[index].setPicture(imageFetcher.getImage());
     }
+
     public void export()
     {
         PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("quiz_id",""+questions[index].getId());
+        pm.addEntry("quiz_id",""+this.id);
         pm.addEntry("username",LocalStorage.getString("username"));
         PostRequest pr= new PostRequest(EXPORT_URL,pm.getValues());
         pr.post();

@@ -16,7 +16,7 @@ public class Urls
 
     //mockup
 
-    public static final String MOCKUP_URL = HOST_URL +"lord_of_the_quiz_backend/testing/mockup/nockup.php";
+    public static final String MOCKUP_URL = HOST_URL +"lord_of_the_quiz_backend/testing/mockup/mockup.php";
 
     //download
 

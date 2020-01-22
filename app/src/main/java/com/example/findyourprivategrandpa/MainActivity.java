@@ -2,10 +2,12 @@ package com.example.findyourprivategrandpa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -43,6 +45,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Bitmap bmp;
         ImageView imageView=findViewById(R.id.imageView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            requestPermissions(permissions, 0);
+        }
         DownloadImageTask downloadImageTask=new DownloadImageTask(imageView);
         Log.d("host", "onCreate: "+ HOST_URL);
         downloadImageTask.execute(QUESTION_IMAGE_URL);
@@ -67,8 +74,8 @@ public class MainActivity extends AppCompatActivity
                 String data=pb.getValues();
                PostRequest postRequest =new PostRequest(HOST_URL +"lord_of_the_quiz_backend/testing/index.php",data);
                postRequest.post();
-                BidirectionalRequest asr=new BidirectionalRequest(HOST_URL +"lord_of_the_quiz_backend/testing/mockup/mockup.php",data);
-        Log.d("Response Cock", "onCreate: "+asr.getResponse());
+        //        BidirectionalRequest asr=new BidirectionalRequest(HOST_URL +"lord_of_the_quiz_backend/testing/mockup/mockup.php",data);
+      //  Log.d("Response Cock", "onCreate: "+asr.getResponse());
         try
         {
             Quiz quiz = new Quiz(0);
@@ -111,7 +118,9 @@ public class MainActivity extends AppCompatActivity
         {
             FileParser.write(localStorage,"{}");
         }
-       ImageUploader iu= new ImageUploader("/storage/emulated/0/DCIM/100ANDRO/DSC_0001.JPG",MOCKUP_URL,"cock");
+       PostMessageBuilder pm = new PostMessageBuilder();
+        pm.addEntry("user","bacock");
+       ImageUploader iu= new ImageUploader("/storage/emulated/0/Download/myfile.jpg",MOCKUP_URL,pm.getValues());
        iu.uploadImage();
     }
     public static String getIp()

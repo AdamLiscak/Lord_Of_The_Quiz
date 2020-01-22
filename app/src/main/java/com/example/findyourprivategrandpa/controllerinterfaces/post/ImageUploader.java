@@ -50,11 +50,14 @@ public class ImageUploader
                 c.connect();
                 OutputStream output = c.getOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, output);
+                int code = c.getResponseCode();
                 output.close();
+
                 /* Scanner result = new Scanner(c.getInputStream());
                 String response = result.nextLine();
                 Log.e("ImageUploader", "Error uploading image: " + response);
                 result.close(); */
+                Log.e("ImageUploader", "uploadBitmap: sucess"+code);
             } catch (Exception e)
             {
                 Log.e("ImageUploader", "Error uploading image", e);
