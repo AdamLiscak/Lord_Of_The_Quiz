@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
+import com.example.findyourprivategrandpa.Timer.Timer;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageFetcher;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
@@ -31,6 +32,7 @@ public class Quiz
     private String author;
     private Question[] questions;
     private HashMap<User,Integer> highScores;
+    QuizTimer timer = new QuizTimer(15000);
     private int[] myScores;
     private int index=0;
     private int points=0;
@@ -38,6 +40,24 @@ public class Quiz
     private int streak=0;
     private float multiplier = 1f;
     public final int ERROR_CODE_OUT_OF_BOUNDS=600;
+
+    private class QuizTimer extends Timer
+    {
+        public QuizTimer(long delay)
+        {
+            super(delay);
+        }
+        @Override
+        public void onTimeUp()
+        {
+            nextQuestion();
+        }
+        @Override
+        public void onInterrupt()
+        {
+
+        }
+    }
 
     public Quiz(Bitmap thumbnail, String name, int id, Question[] questions)
     {
@@ -179,6 +199,7 @@ public class Quiz
        // pm.addEntry("qID",""+questions[index].getId());
         ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL+this.id+"/"+1,"");
         questions[index].setPicture(imageFetcher.getImage());
+        timer.start();
     }
     public int multiplyByStreak(int score)
     {
@@ -194,6 +215,7 @@ public class Quiz
       //  pm.addEntry("qID",""+questions[index].getId());
         ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL+this.id+"/"+index,"");
         questions[index].setPicture(imageFetcher.getImage());
+        timer.start();
     }
 
     public void export()
@@ -256,6 +278,7 @@ public class Quiz
     }
     public boolean isCorrect(int answerID)
     {
+        timer.interrupt();
         boolean isCorrect=questions[index].isCorrect(answerID);
         questions[index].setPoints(multiplyByStreak(questions[index].getPoints()));
         points+=questions[index].getPoints();
