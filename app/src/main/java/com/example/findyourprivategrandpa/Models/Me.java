@@ -16,9 +16,9 @@ import static com.example.findyourprivategrandpa.Urls.MY_QUIZES_URL;
 import static com.example.findyourprivategrandpa.Urls.MY_SCORES_URL;
 import static com.example.findyourprivategrandpa.Urls.REGISTER_URL;
 import static com.example.findyourprivategrandpa.Urls.USER_QUIZES_URL;
-
 public class Me
 {
+    public static final int NAME_ALREADY_EXISTS_EXCEPTION = 601;
     private HashMap<Quiz,Integer> myHighScores;
     private Quiz[] myQuizes;
     private QuizBuilder currentlyEdited;
@@ -80,20 +80,13 @@ public class Me
         }
         return authorized;
     }
-    public boolean register(String username, String password) throws Exception
+    public int register(String username, String password) throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("username",username);
         pm.addEntry("password",password);
         BidirectionalRequest br= new BidirectionalRequest(REGISTER_URL,pm.getValues());
-        JSONObject jsonObject = new JSONObject(br.getResponse());
-        Boolean authorized= jsonObject.getBoolean("status");
-        if(authorized)
-        {
-            LocalStorage.changeProperty("user",username);
-            LocalStorage.commit();
-        }
-        return authorized;
+        return Integer.parseInt(br.getResponse());
     }
     public boolean logout() throws Exception
     {

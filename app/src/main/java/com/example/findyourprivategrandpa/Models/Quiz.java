@@ -27,7 +27,7 @@ public class Quiz
 {
     private static Quiz[] quizzes;
     private Bitmap thumbnail;
-    private final String name;
+    private String name;
     private String author;
     private Question[] questions;
     private HashMap<User,Integer> highScores;
@@ -37,6 +37,7 @@ public class Quiz
     private int id;
     private int streak=0;
     private float multiplier = 1f;
+    public final int ERROR_CODE_OUT_OF_BOUNDS=600;
 
     public Quiz(Bitmap thumbnail, String name, int id, Question[] questions)
     {
@@ -57,28 +58,35 @@ public class Quiz
         pb.addEntry("page",""+page);
         BidirectionalRequest br=new BidirectionalRequest(QUIZZES_URL,pb.getValues());
         String stringJson=br.getResponse();
-        JSONObject jsonObject;
-        jsonObject=new JSONObject(stringJson);
-        JSONArray quizzes=jsonObject.getJSONArray("quizzes");
+        JSONArray quizzes=new JSONArray(stringJson);
         Quiz.quizzes=new Quiz[quizzes.length()];
         for (int i = 0; i < quizzes.length() ; i++)
         {
-            Quiz quiz= new Quiz(jsonObject.getInt("id"),jsonObject.getString("name"));
+            Quiz quiz= new Quiz((JSONObject)quizzes.get(i));
+        }
+    }
+    public Quiz(JSONObject jsonObject)
+    {
+        try
+        {
+            author = jsonObject.getString("author");
+            name = jsonObject.getString("name");
+            id = jsonObject.getInt("id");
             JSONArray jsonQuestions = jsonObject.getJSONArray("questions");
             int length = jsonQuestions.length();
-            quiz.questions = new Question[length];
-            for (int j = 0; j < length; j++)
+            questions = new Question[length];
+            for (int i = 0; i < length; i++)
             {
                 JSONObject jsonQuestion = (JSONObject) jsonQuestions.get(i);
                 Question question = new Question(jsonQuestion);
-                quiz.questions[i] = question;
+                questions[i] = question;
             }
-            PostMessageBuilder pm = new PostMessageBuilder();
-            pm.addEntry("username", LocalStorage.getString("username"));
-            pb.addEntry("id", "" + quiz.id);
-            ImageFetcher imageFetcher = new ImageFetcher(THUMBNAIL_URL, pm.getValues());
-            quiz.thumbnail = imageFetcher.getImage();
-            Quiz.quizzes[i]=quiz;
+            ImageFetcher imageFetcher = new ImageFetcher(THUMBNAIL_URL+this.id+"/-1", "");
+            this.thumbnail = imageFetcher.getImage();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
     public void pullHighScores() throws Exception
@@ -86,13 +94,12 @@ public class Quiz
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("id",""+id);
         BidirectionalRequest br= new BidirectionalRequest(HIGH_SCORES_BY_QUIZ_URL,pm.getValues());
-        JSONObject jsonObject = new JSONObject(br.getResponse());
-        JSONArray jsonScores= jsonObject.getJSONArray("scores");
+        JSONArray jsonScores= new JSONArray(br.getResponse());
         for (int i=0;i<jsonScores.length();i++)
         {
             JSONObject scoreTuple=jsonScores.getJSONObject(i);
-            User user=new User(scoreTuple.getInt("id"),scoreTuple.getString("name"));
-            highScores.put(user,scoreTuple.getInt("score"));
+            User user=new User(scoreTuple.getInt("userID"),scoreTuple.getString("name"));
+            highScores.put(user,scoreTuple.getInt("points"));
         }
     }
     public void pullMyScores() throws Exception
@@ -167,10 +174,10 @@ public class Quiz
     }
     public void start()
     {
-        PostMessageBuilder pm= new PostMessageBuilder();
-        pm.addEntry("username",LocalStorage.getString("username"));
-        pm.addEntry("qID",""+questions[index].getId());
-        ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
+      //  PostMessageBuilder pm= new PostMessageBuilder();
+        //pm.addEntry("username",LocalStorage.getString("username"));
+       // pm.addEntry("qID",""+questions[index].getId());
+        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL+this.id+"/"+1,"");
         questions[index].setPicture(imageFetcher.getImage());
     }
     public int multiplyByStreak(int score)
@@ -181,11 +188,11 @@ public class Quiz
     {
         questions[index].setPicture(null);
         index++;
-        PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("username",LocalStorage.getString("username"));
-        pm.addEntry("id",""+id);
-        pm.addEntry("qID",""+questions[index].getId());
-        ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL,pm.getValues());
+       // PostMessageBuilder pm=new PostMessageBuilder();
+      //  pm.addEntry("username",LocalStorage.getString("username"));
+     //   pm.addEntry("id",""+id);
+      //  pm.addEntry("qID",""+questions[index].getId());
+        ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL+this.id+"/"+index,"");
         questions[index].setPicture(imageFetcher.getImage());
     }
 
