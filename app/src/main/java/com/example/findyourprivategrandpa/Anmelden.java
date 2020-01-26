@@ -31,5 +31,9 @@ public class Anmelden extends AppCompatActivity {
         Intent intent = new Intent(this,Start.class);
         startActivity(intent);
     }
+    public void openActivityRegister(View view){
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
 
 }

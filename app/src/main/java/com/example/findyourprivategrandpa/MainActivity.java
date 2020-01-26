@@ -11,9 +11,11 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.findyourprivategrandpa.Models.Me;
 import com.example.findyourprivategrandpa.Models.Quiz;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifier;
@@ -96,6 +98,12 @@ public class MainActivity extends AppCompatActivity
     public static void setLocalStorage(File localStorage)
     {
         MainActivity.localStorage = localStorage;
+    }
+    public void logout(View view)
+    {
+        Me.logout();
+        Intent intent = new Intent(this,Anmelden.class);
+        startActivity(intent);
     }
 
     @Override

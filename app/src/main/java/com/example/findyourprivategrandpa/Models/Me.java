@@ -83,15 +83,22 @@ public class Me
         }
         return authorized;
     }
-    public static int register(String username, String password) throws Exception
+    public static int register(String username, String password)
     {
-        PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("username",username);
-        pm.addEntry("password",password);
-        BidirectionalRequest br= new BidirectionalRequest(REGISTER_URL,pm.getValues());
-        return Integer.parseInt(br.getResponse());
+        try
+        {
+            PostMessageBuilder pm = new PostMessageBuilder();
+            pm.addEntry("username", username);
+            pm.addEntry("password", password);
+            BidirectionalRequest br = new BidirectionalRequest(REGISTER_URL+"?"+pm.getValues(),"");
+            return Integer.parseInt(br.getResponse());
+        }
+        catch (Exception e)
+        {
+            return 500;
+        }
     }
-    public static boolean logout() throws Exception
+    public static boolean logout()
     {
        // PostMessageBuilder pm=new PostMessageBuilder();
     //    pm.addEntry("username",LocalStorage.getString("username"));
@@ -100,7 +107,7 @@ public class Me
      //   Boolean authorized= jsonObject.getBoolean("status");
       //  if(authorized)
        // {
-            LocalStorage.removeString("username");
+            LocalStorage.remove("username");
             LocalStorage.commit();
       //  }
         return true;
