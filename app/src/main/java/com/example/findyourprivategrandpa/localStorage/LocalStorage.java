@@ -2,7 +2,7 @@ package com.example.findyourprivategrandpa.localStorage;
 
 import android.util.Log;
 
-import com.example.findyourprivategrandpa.MainActivity;
+import com.example.findyourprivategrandpa.Activities.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

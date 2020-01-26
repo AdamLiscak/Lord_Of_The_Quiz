@@ -1,4 +1,4 @@
-package com.example.findyourprivategrandpa;
+package com.example.findyourprivategrandpa.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.findyourprivategrandpa.R;
 
 public class Anmelden extends AppCompatActivity {
 
@@ -34,6 +36,10 @@ public class Anmelden extends AppCompatActivity {
     public void openActivityRegister(View view){
         Intent intent = new Intent(this,RegisterActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 
 }

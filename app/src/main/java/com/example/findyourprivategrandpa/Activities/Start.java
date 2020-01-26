@@ -1,17 +1,16 @@
-package com.example.findyourprivategrandpa;
+package com.example.findyourprivategrandpa.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.findyourprivategrandpa.Models.Me;
+import com.example.findyourprivategrandpa.R;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 public class Start extends AppCompatActivity {
@@ -40,6 +39,7 @@ public class Start extends AppCompatActivity {
             {
                 LocalStorage.changeProperty("username",user);
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
             else

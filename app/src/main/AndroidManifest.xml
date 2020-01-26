@@ -16,11 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GameActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".Start" />
-        <activity android:name=".Anmelden" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.QuizBuilderUploadActivity"></activity>
+        <activity android:name=".Activities.QuizResultActivity" />
+        <activity android:name=".Activities.QuestionSeparatorActivity" />
+        <activity android:name=".Activities.QuizStarterActivity" />
+        <activity android:name=".Activities.GameActivity" />
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.Start" />
+        <activity android:name=".Activities.Anmelden" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

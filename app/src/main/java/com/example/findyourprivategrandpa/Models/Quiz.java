@@ -58,14 +58,6 @@ public class Quiz
 
         }
     }
-
-    public Quiz(Bitmap thumbnail, String name, int id, Question[] questions)
-    {
-        this.thumbnail=thumbnail;
-        this.name=name;
-        this.id=id;
-        this.questions=questions;
-    }
     public Quiz(int id,String name)
     {
         this.id=id;
@@ -135,58 +127,6 @@ public class Quiz
         {
             myScores[i]=(int)jsonScores.get(i);
         }
-    }
-    public Quiz (int id) throws Exception
-    {
-        this.id=id;
-        PostMessageBuilder pb= new PostMessageBuilder();
-        pb.addEntry("id",""+id);
-        pb.addEntry("username",LocalStorage.getString("username"));
-        BidirectionalRequest br=new BidirectionalRequest(QUIZ_URL,pb.getValues());
-        String stringJson=br.getResponse();
-        JSONObject jsonObject;
-        jsonObject=new JSONObject(stringJson);
-        author=jsonObject.getString("author");
-        name=jsonObject.getString("name");
-        JSONArray jsonQuestions= jsonObject.getJSONArray("questions");
-        int length=jsonQuestions.length();
-        questions=new Question[length];
-        for(int i=0;i<length;i++)
-        {
-            JSONObject jsonQuestion=(JSONObject)jsonQuestions.get(i);
-            Question question= new Question(jsonQuestion);
-            questions[i]=question;
-        }
-        PostMessageBuilder pm= new PostMessageBuilder();
-        pm.addEntry("username",LocalStorage.getString("username"));
-        pb.addEntry("id",""+id);
-        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL,pm.getValues());
-       this.thumbnail=imageFetcher.getImage();
-    }
-    public void downloadQuiz() throws Exception
-    {
-        PostMessageBuilder pb= new PostMessageBuilder();
-        pb.addEntry("id",""+id);
-        pb.addEntry("username",LocalStorage.getString("username"));
-        BidirectionalRequest br=new BidirectionalRequest(QUIZ_URL,pb.getValues());
-        String stringJson=br.getResponse();
-        JSONObject jsonObject;
-        jsonObject=new JSONObject(stringJson);
-        author=jsonObject.getString("author");
-        JSONArray jsonQuestions= jsonObject.getJSONArray("questions");
-        int length=jsonQuestions.length();
-        questions=new Question[length];
-        for(int i=0;i<length;i++)
-        {
-            JSONObject jsonQuestion=(JSONObject)jsonQuestions.get(i);
-            Question question= new Question(jsonQuestion);
-            questions[i]=question;
-        }
-        PostMessageBuilder pm= new PostMessageBuilder();
-        pm.addEntry("username",LocalStorage.getString("username"));
-        pm.addEntry("id",""+id);
-        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL,pm.getValues());
-        this.thumbnail=imageFetcher.getImage();
     }
     public Question getQuestion()
     {

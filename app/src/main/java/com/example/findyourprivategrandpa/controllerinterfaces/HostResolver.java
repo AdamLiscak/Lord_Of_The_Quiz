@@ -1,7 +1,7 @@
 package com.example.findyourprivategrandpa.controllerinterfaces;
 import android.util.Log;
 
-import com.example.findyourprivategrandpa.MainActivity;
+import com.example.findyourprivategrandpa.Activities.MainActivity;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 import java.net.HttpURLConnection;

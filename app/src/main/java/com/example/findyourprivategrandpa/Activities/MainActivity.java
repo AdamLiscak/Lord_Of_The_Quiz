@@ -1,39 +1,23 @@
-package com.example.findyourprivategrandpa;
+package com.example.findyourprivategrandpa.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.findyourprivategrandpa.Models.Me;
-import com.example.findyourprivategrandpa.Models.Quiz;
-import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
-import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifier;
-import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
-import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageUploader;
-import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
-import com.example.findyourprivategrandpa.controllerinterfaces.post.PostRequest;
+import com.example.findyourprivategrandpa.R;
 import com.example.findyourprivategrandpa.localStorage.FileParser;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
-import org.json.JSONObject;
-
 import java.io.File;
-
-import static com.example.findyourprivategrandpa.Urls.HOST_URL;
-import static com.example.findyourprivategrandpa.Urls.MOCKUP_URL;
-import static com.example.findyourprivategrandpa.Urls.QUESTION_IMAGE_URL;
-import static com.example.findyourprivategrandpa.localStorage.LocalStorage.commit;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -54,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         if(LocalStorage.isNull("username"))
         {
             Intent intent = new Intent(this, Anmelden.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
     }
@@ -103,6 +88,7 @@ public class MainActivity extends AppCompatActivity
     {
         Me.logout();
         Intent intent = new Intent(this,Anmelden.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

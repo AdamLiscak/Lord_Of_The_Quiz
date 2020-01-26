@@ -1,4 +1,4 @@
-package com.example.findyourprivategrandpa;
+package com.example.findyourprivategrandpa.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.findyourprivategrandpa.Models.Me;
+import com.example.findyourprivategrandpa.R;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 
 public class RegisterActivity extends AppCompatActivity
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity
             LocalStorage.changeProperty("username",user);
             LocalStorage.commit();
             Intent intent = new Intent(this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
         else if(numStatus==600)
