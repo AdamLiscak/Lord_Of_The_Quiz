@@ -86,6 +86,10 @@ public class LocalStorage
         }
         return null;
     }
+    public static void remove(String key)
+    {
+        config.remove("username");
+    }
     public static String removeString(String key)
     {
         try
@@ -111,6 +115,10 @@ public class LocalStorage
             e.printStackTrace();
         }
         return null;
+    }
+    public static boolean isNull(String property)
+    {
+        return config.isNull(property);
     }
     public static JSONObject getConfiguration()
     {

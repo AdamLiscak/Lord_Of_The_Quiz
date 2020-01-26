@@ -1,5 +1,7 @@
 package com.example.findyourprivategrandpa.Models;
 
+import android.util.Log;
+
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
@@ -65,22 +67,23 @@ public class Me
             myHighScores.put(quiz,scoreTuple.getInt("quiz"));
         }
     }
-    public boolean login(String username,String password) throws Exception
+    public static boolean login(String username,String password) throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("username",username);
         pm.addEntry("password",password);
-        BidirectionalRequest br= new BidirectionalRequest(LOGIN_URL,pm.getValues());
-        JSONObject jsonObject = new JSONObject(br.getResponse());
-        Boolean authorized= jsonObject.getBoolean("status");
+        BidirectionalRequest br= new BidirectionalRequest(LOGIN_URL+"?"+pm.getValues(),"");
+        String response = br.getResponse();
+        Log.d("login", "login: "+response);
+        Boolean authorized = Boolean.parseBoolean(response);
         if(authorized)
         {
-            LocalStorage.changeProperty("user",username);
+            LocalStorage.changeProperty("username",username);
             LocalStorage.commit();
         }
         return authorized;
     }
-    public int register(String username, String password) throws Exception
+    public static int register(String username, String password) throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("username",username);
@@ -88,19 +91,19 @@ public class Me
         BidirectionalRequest br= new BidirectionalRequest(REGISTER_URL,pm.getValues());
         return Integer.parseInt(br.getResponse());
     }
-    public boolean logout() throws Exception
+    public static boolean logout() throws Exception
     {
-        PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("username",LocalStorage.getString("username"));
-        BidirectionalRequest br= new BidirectionalRequest(LOGOUT_URL,pm.getValues());
-        JSONObject jsonObject = new JSONObject(br.getResponse());
-        Boolean authorized= jsonObject.getBoolean("status");
-        if(authorized)
-        {
+       // PostMessageBuilder pm=new PostMessageBuilder();
+    //    pm.addEntry("username",LocalStorage.getString("username"));
+      //  BidirectionalRequest br= new BidirectionalRequest(LOGOUT_URL,pm.getValues());
+     //   JSONObject jsonObject = new JSONObject(br.getResponse());
+     //   Boolean authorized= jsonObject.getBoolean("status");
+      //  if(authorized)
+       // {
             LocalStorage.removeString("username");
             LocalStorage.commit();
-        }
-        return authorized;
+      //  }
+        return true;
     }
     public boolean deleteAccount() throws Exception
     {

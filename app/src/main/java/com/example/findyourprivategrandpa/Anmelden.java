@@ -31,4 +31,5 @@ public class Anmelden extends AppCompatActivity {
         Intent intent = new Intent(this,Start.class);
         startActivity(intent);
     }
+
 }
