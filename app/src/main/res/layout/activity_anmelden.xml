@@ -51,7 +51,7 @@
         app:layout_constraintVertical_bias="0.731" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/cardView"
         android:layout_width="280dp"
         android:layout_height="196dp"
         android:text="QUIZ"

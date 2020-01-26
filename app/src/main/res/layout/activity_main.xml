@@ -7,7 +7,7 @@
     tools:context=".Activities.MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -41,8 +41,9 @@
         android:id="@+id/button_list_quizzes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="listQuizzes"
         android:text="Quiz Spielen"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

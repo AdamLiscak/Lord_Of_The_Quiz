@@ -10,6 +10,7 @@
         android:id="@+id/button_start_quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="startGame"
         android:text="Los Gehts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,4 +37,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_author_textView" />
+
+    <TextView
+        android:id="@+id/textView_quiz_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Best Quiz in China"
+        app:layout_constraintBottom_toTopOf="@+id/quiz_author_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.839" />
 </androidx.constraintlayout.widget.ConstraintLayout>

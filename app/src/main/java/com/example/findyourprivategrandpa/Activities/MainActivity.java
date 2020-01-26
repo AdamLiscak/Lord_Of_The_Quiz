@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.findyourprivategrandpa.Models.Me;
+import com.example.findyourprivategrandpa.Models.Quiz;
 import com.example.findyourprivategrandpa.R;
 import com.example.findyourprivategrandpa.localStorage.FileParser;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
@@ -89,6 +90,11 @@ public class MainActivity extends AppCompatActivity
         Me.logout();
         Intent intent = new Intent(this,Anmelden.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    public void listQuizzes(View view)
+    {
+        Intent intent = new Intent(this, QuizHubActivity.class);
         startActivity(intent);
     }
 

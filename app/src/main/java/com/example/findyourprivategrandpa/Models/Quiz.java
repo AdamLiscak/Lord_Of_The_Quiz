@@ -1,6 +1,7 @@
 package com.example.findyourprivategrandpa.Models;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -39,6 +40,7 @@ public class Quiz
     private int id;
     private int streak=0;
     private float multiplier = 1f;
+    private static int currentQuiz;
     public final int ERROR_CODE_OUT_OF_BOUNDS=600;
 
     private class QuizTimer extends Timer
@@ -63,18 +65,29 @@ public class Quiz
         this.id=id;
         this.name=name;
     }
+
+    public static int getCurrentQuiz()
+    {
+        return currentQuiz;
+    }
+    public static void setCurrentQuiz(int index)
+    {
+        currentQuiz=index;
+    }
+
     public static void pullQuizzes(int page) throws Exception
     {
         PostMessageBuilder pb= new PostMessageBuilder();
-        pb.addEntry("username",LocalStorage.getString("username"));
+      //  pb.addEntry("username",LocalStorage.getString("username"));
         pb.addEntry("page",""+page);
-        BidirectionalRequest br=new BidirectionalRequest(QUIZZES_URL,pb.getValues());
+        BidirectionalRequest br=new BidirectionalRequest(QUIZZES_URL+"?"+pb.getValues(),"");
         String stringJson=br.getResponse();
+        //Log.d("StringJson", "pullQuizzes: "+stringJson);
         JSONArray quizzes=new JSONArray(stringJson);
         Quiz.quizzes=new Quiz[quizzes.length()];
         for (int i = 0; i < quizzes.length() ; i++)
         {
-            Quiz quiz= new Quiz((JSONObject)quizzes.get(i));
+            Quiz.quizzes[i] = new Quiz((JSONObject)quizzes.get(i));
         }
     }
     public Quiz(JSONObject jsonObject)
@@ -139,8 +152,14 @@ public class Quiz
        // pm.addEntry("qID",""+questions[index].getId());
         ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL+this.id+"/"+1,"");
         questions[index].setPicture(imageFetcher.getImage());
-        timer.start();
+      //  timer.start();
     }
+
+    public int getId()
+    {
+        return id;
+    }
+
     public int multiplyByStreak(int score)
     {
         return (int)(multiplier *score);

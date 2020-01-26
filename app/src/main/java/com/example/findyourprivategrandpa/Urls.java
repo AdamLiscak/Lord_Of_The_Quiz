@@ -23,7 +23,7 @@ public class Urls
     //download
 
     public static final String QUESTION_IMAGE_URL = DOWNLOAD_DIR+"chadDaniels.jpg";
-    public static final String THUMBNAIL_URL = DOWNLOAD_DIR+"images/" ;
+    public static final String THUMBNAIL_URL = ROOT_DIR+"images/";
     public static final String QUIZ_URL = DOWNLOAD_DIR+"quiz.php";
     public static final String QUIZZES_URL = DOWNLOAD_DIR+"quizzes.php";
     public static final String MY_SCORES_URL=DOWNLOAD_DIR+"myhighscores.php";
