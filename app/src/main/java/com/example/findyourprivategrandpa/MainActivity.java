@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.findyourprivategrandpa.Models.Me;
 import com.example.findyourprivategrandpa.Models.Quiz;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.DownloadImageTask;
 import com.example.findyourprivategrandpa.controllerinterfaces.get.FileStringifier;
@@ -43,52 +46,16 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         initiateVars();
         setContentView(R.layout.activity_main);
-        Bitmap bmp;
-        ImageView imageView=findViewById(R.id.imageView);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
             requestPermissions(permissions, 0);
         }
-        DownloadImageTask downloadImageTask=new DownloadImageTask(imageView);
-        Log.d("host", "onCreate: "+ HOST_URL);
-        downloadImageTask.execute(QUESTION_IMAGE_URL);
-        String json=new FileStringifier(HOST_URL +"lord_of_the_quiz_backend/download/grandpa.json").stringify();
-        JSONObject jsonObject=null;
-        String name="";
-        try
+        if(LocalStorage.isNull("username"))
         {
-            jsonObject= new JSONObject(json);
-            JSONObject grandpa=  jsonObject.getJSONObject("grandpa");
-            name=grandpa.getString("name");
+            Intent intent = new Intent(this, Anmelden.class);
+            startActivity(intent);
         }
-        catch (Exception e)
-        {
-        }
-        Log.d("penis ster create", "onCreate: "+name);
-
-
-                PostMessageBuilder pb=new PostMessageBuilder();
-                pb.addEntry("to","Jenny");
-                pb.addEntry("from","Bacock");
-                String data=pb.getValues();
-               PostRequest postRequest =new PostRequest(HOST_URL +"lord_of_the_quiz_backend/testing/index.php",data);
-               postRequest.post();
-        //        BidirectionalRequest asr=new BidirectionalRequest(HOST_URL +"lord_of_the_quiz_backend/testing/mockup/mockup.php",data);
-      //  Log.d("Response Cock", "onCreate: "+asr.getResponse());
-        try
-        {
-            Quiz quiz = new Quiz(0);
-            quiz.start();
-            Log.d("Quiz succesful", "onCreate: "+quiz.toString());
-        }
-        catch (Exception e)
-        {
-            Log.d("Quiz unsuccesful", "onCreate: "+e.toString());
-        }
-        Toast toast= Toast.makeText(getApplicationContext(),ip,Toast.LENGTH_SHORT);
-        toast.show();
-
     }
     public void initiateVars()
     {
@@ -118,10 +85,6 @@ public class MainActivity extends AppCompatActivity
         {
             FileParser.write(localStorage,"{}");
         }
-       PostMessageBuilder pm = new PostMessageBuilder();
-        pm.addEntry("user","bacock");
-       ImageUploader iu= new ImageUploader("/storage/emulated/0/Download/myfile.jpg",MOCKUP_URL,pm.getValues());
-       iu.uploadImage();
     }
     public static String getIp()
     {
@@ -135,6 +98,12 @@ public class MainActivity extends AppCompatActivity
     public static void setLocalStorage(File localStorage)
     {
         MainActivity.localStorage = localStorage;
+    }
+    public void logout(View view)
+    {
+        Me.logout();
+        Intent intent = new Intent(this,Anmelden.class);
+        startActivity(intent);
     }
 
     @Override

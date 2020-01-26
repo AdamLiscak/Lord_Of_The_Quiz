@@ -221,8 +221,9 @@ public class Quiz
     public void export()
     {
         PostMessageBuilder pm=new PostMessageBuilder();
-        pm.addEntry("quiz_id",""+this.id);
+        pm.addEntry("quizId",""+this.id);
         pm.addEntry("username",LocalStorage.getString("username"));
+        pm.addEntry("points",""+this.points);
         PostRequest pr= new PostRequest(EXPORT_URL,pm.getValues());
         pr.post();
     }
