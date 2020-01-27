@@ -24,3 +24,5 @@ public abstract class Timer extends Thread
     public abstract void onTimeUp();
     public abstract void  onInterrupt();
 }
+
+
