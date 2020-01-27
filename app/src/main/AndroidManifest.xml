@@ -15,8 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ScoreBoardActivity"></activity>
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
+        <activity android:name=".Activities.QuizBuilderHeader"></activity>
+        <activity android:name=".Activities.QuizBuilderActivity" />
+        <activity android:name=".Activities.ScoreBoardActivity" />
         <activity android:name=".Activities.QuizHubActivity" />
         <activity android:name=".Activities.QuizBuilderUploadActivity" />
         <activity android:name=".Activities.QuizResultActivity" />

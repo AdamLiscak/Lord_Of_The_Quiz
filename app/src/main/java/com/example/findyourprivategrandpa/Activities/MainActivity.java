@@ -9,6 +9,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -17,6 +18,8 @@ import com.example.findyourprivategrandpa.Models.Quiz;
 import com.example.findyourprivategrandpa.R;
 import com.example.findyourprivategrandpa.localStorage.FileParser;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
+
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -41,6 +44,13 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, Anmelden.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+        }
+        Log.d("penisCOock",getExternalFilesDir("Download/Images").getAbsolutePath());
+        Log.d("fuckAndroid", "onCreate: ");
+        if(LocalStorage.isNull("quiz"))
+        {
+            LocalStorage.changeProperty("quiz",new JSONObject());
+            LocalStorage.commit();
         }
       //  Log.d("penis", "onCreate: "+R.id.scoreboard_rank_textView);
     }
@@ -96,6 +106,11 @@ public class MainActivity extends AppCompatActivity
     public void listQuizzes(View view)
     {
         Intent intent = new Intent(this, QuizHubActivity.class);
+        startActivity(intent);
+    }
+    public void editQuiz(View view)
+    {
+        Intent intent = new Intent(this, QuizBuilderHeader.class);
         startActivity(intent);
     }
 
