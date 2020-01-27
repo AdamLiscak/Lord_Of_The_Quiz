@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/quiz_result_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="185dp"
+        android:layout_height="39dp"
         android:text="insgesamt Score: 400"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -22,17 +22,19 @@
 
     <TextView
         android:id="@+id/quiz_result_last_score"
-        android:layout_width="324dp"
-        android:layout_height="26dp"
+        android:layout_width="276dp"
+        android:layout_height="37dp"
         android:layout_marginTop="44dp"
         android:fontFamily="monospace"
         android:text="bei der letzten frage score : 50"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quiz_result_score" />
+        app:layout_constraintTop_toBottomOf="@+id/quiz_result_score"
+        app:layout_constraintVertical_bias="0.104" />
 
     <Button
         android:id="@+id/quiz_result_quizhub_button"

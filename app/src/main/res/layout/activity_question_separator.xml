@@ -4,24 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.QuestionSeparatorActivity">
+    tools:context=".Activities.QuestionSeparatorActivity"
+    android:background="@drawable/background2"
+    >
 
     <TextView
         android:id="@+id/textView_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Du hast n Punkte erreicht"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.264" />
+        app:layout_constraintVertical_bias="0.269" />
 
     <TextView
         android:id="@+id/textView_Streak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
         android:text="Streak:3"
         app:layout_constraintBottom_toTopOf="@+id/textView_points"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +34,9 @@
 
     <Button
         android:id="@+id/button_next_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:background="@drawable/custom_button"
         android:text="Nächste Frage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,21 +47,25 @@
 
     <Button
         android:id="@+id/button_quit_quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:text="abbrechen"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_next_question"
-        app:layout_constraintVertical_bias="0.211" />
+        app:layout_constraintVertical_bias="0.211"
+
+        />
 
     <TextView
         android:id="@+id/textView_current_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
+        android:textColor="#FFFFFF"
         android:text="Bei diese Frage hast du n Punkte erreicht"
         app:layout_constraintBottom_toTopOf="@+id/textView_points"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +77,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Frage 10/15 fertig"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textView_Streak"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
