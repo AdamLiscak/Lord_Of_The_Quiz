@@ -54,6 +54,7 @@
         android:id="@+id/textView_register_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#0FFFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/editText_register_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
