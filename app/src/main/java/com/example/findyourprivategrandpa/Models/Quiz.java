@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.findyourprivategrandpa.Models.Structs.ScoreStruct;
 import com.example.findyourprivategrandpa.Timer.Timer;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
 import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageFetcher;
@@ -32,7 +33,7 @@ public class Quiz
     private String name;
     private String author;
     private Question[] questions;
-    private HashMap<User,Integer> highScores;
+    private ScoreStruct[] highScores;
     QuizTimer timer = new QuizTimer(15000);
     private int[] myScores;
     private int index=0;
@@ -118,13 +119,16 @@ public class Quiz
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("id",""+id);
-        BidirectionalRequest br= new BidirectionalRequest(HIGH_SCORES_BY_QUIZ_URL,pm.getValues());
+        BidirectionalRequest br= new BidirectionalRequest(HIGH_SCORES_BY_QUIZ_URL+"?"+pm.getValues(),"");
         JSONArray jsonScores= new JSONArray(br.getResponse());
+        Log.d("jsonScores", "pullHighScores: "+jsonScores.toString());
+        highScores = new ScoreStruct[jsonScores.length()];
         for (int i=0;i<jsonScores.length();i++)
         {
             JSONObject scoreTuple=jsonScores.getJSONObject(i);
             User user=new User(scoreTuple.getInt("userID"),scoreTuple.getString("name"));
-            highScores.put(user,scoreTuple.getInt("points"));
+            ScoreStruct scoreStruct = new ScoreStruct(user,scoreTuple.getInt("points"));
+            highScores[i]=scoreStruct;
         }
     }
     public void pullMyScores() throws Exception
@@ -150,7 +154,7 @@ public class Quiz
       //  PostMessageBuilder pm= new PostMessageBuilder();
         //pm.addEntry("username",LocalStorage.getString("username"));
        // pm.addEntry("qID",""+questions[index].getId());
-        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL+this.id+"/"+1,"");
+        ImageFetcher imageFetcher=new ImageFetcher(THUMBNAIL_URL+this.id+"/"+(index+1),"");
         questions[index].setPicture(imageFetcher.getImage());
       //  timer.start();
     }
@@ -158,6 +162,12 @@ public class Quiz
     public int getId()
     {
         return id;
+    }
+    public void reset()
+    {
+        this.points = 0;
+        this.streak = 0;
+        this.multiplier  = 1f;
     }
 
     public int multiplyByStreak(int score)
@@ -172,9 +182,8 @@ public class Quiz
       //  pm.addEntry("username",LocalStorage.getString("username"));
      //   pm.addEntry("id",""+id);
       //  pm.addEntry("qID",""+questions[index].getId());
-        ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL+this.id+"/"+index,"");
-        questions[index].setPicture(imageFetcher.getImage());
-        timer.start();
+    //    ImageFetcher imageFetcher=new ImageFetcher(QUESTION_IMAGE_URL+this.id+"/"+index,"");
+    //    questions[index].setPicture(imageFetcher.getImage());
     }
 
     public void export()
@@ -183,7 +192,7 @@ public class Quiz
         pm.addEntry("quizId",""+this.id);
         pm.addEntry("username",LocalStorage.getString("username"));
         pm.addEntry("points",""+this.points);
-        PostRequest pr= new PostRequest(EXPORT_URL,pm.getValues());
+        PostRequest pr= new PostRequest(EXPORT_URL+"?"+pm.getValues(),"");
         pr.post();
     }
 
@@ -269,8 +278,15 @@ public class Quiz
         }
         return sb.toString();
     }
-
-    public HashMap<User, Integer> getHighScores()
+    public boolean reachedEnd()
+    {
+        return index+1 == questions.length;
+    }
+    public int getIndex()
+    {
+        return this.index;
+    }
+    public ScoreStruct[] getHighScores()
     {
         return highScores;
     }

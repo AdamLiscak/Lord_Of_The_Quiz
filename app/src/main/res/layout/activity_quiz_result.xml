@@ -6,4 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".Activities.QuizResultActivity">
 
+    <TextView
+        android:id="@+id/quiz_result_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="insgesamt Score: 400"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.375" />
+
+    <TextView
+        android:id="@+id/quiz_result_last_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="bei der letzten frage score : 50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_result_score" />
+
+    <Button
+        android:id="@+id/quiz_result_quizhub_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="finish"
+        android:text="Fertig"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_result_last_score" />
+
+    <TextView
+        android:id="@+id/quiz_result_quiz_finished_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz abgeschlossen"
+        app:layout_constraintBottom_toTopOf="@+id/quiz_result_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/quiz_result_activity_scoreboard_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="scoreboard"
+        android:text="Scoreboard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_result_quizhub_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

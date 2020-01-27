@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
+      //  Log.d("penis", "onCreate: "+R.id.scoreboard_rank_textView);
     }
     public void initiateVars()
     {

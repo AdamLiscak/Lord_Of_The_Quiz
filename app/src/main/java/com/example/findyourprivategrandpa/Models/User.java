@@ -25,6 +25,12 @@ public class User {
         this.id=id;
         this.name=name;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
     public void pullHighScores() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();

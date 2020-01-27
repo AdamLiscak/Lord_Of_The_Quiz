@@ -22,12 +22,13 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizHolder>
         try
         {
             Quiz.pullQuizzes(0);
+            quizzes= Quiz.getQuizzes();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        quizzes= Quiz.getQuizzes();
+
     }
     public class QuizHolder extends RecyclerView.ViewHolder {
 

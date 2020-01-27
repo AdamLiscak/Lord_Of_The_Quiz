@@ -25,7 +25,7 @@ public class Question
     }
     private long timeElapsed()
     {
-        return tStart-System.currentTimeMillis();
+        return System.currentTimeMillis()-tStart;
     }
     boolean isCorrect(int answerID)
     {

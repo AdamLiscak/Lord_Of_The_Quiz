@@ -33,4 +33,9 @@ public class QuizStarterActivity extends AppCompatActivity
         Intent intent = new Intent(this,GameActivity.class);
         startActivity(intent);
     }
+    public void scoreBoard(View view)
+    {
+        Intent intent = new Intent(this, ScoreBoardActivity.class);
+        startActivity(intent);
+    }
 }

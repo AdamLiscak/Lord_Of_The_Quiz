@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.QuizHubActivity"></activity>
+        <activity android:name=".Activities.ScoreBoardActivity"></activity>
+        <activity android:name=".Activities.QuizHubActivity" />
         <activity android:name=".Activities.QuizBuilderUploadActivity" />
         <activity android:name=".Activities.QuizResultActivity" />
         <activity android:name=".Activities.QuestionSeparatorActivity" />
