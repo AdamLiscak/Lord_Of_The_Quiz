@@ -5,11 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Anmelden">
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"></View>
+        android:background="@drawable/background"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"></View>
 
     <Button
         android:id="@+id/anmelden"
@@ -20,7 +23,7 @@
         android:background="@drawable/custom_button"
         android:text="Anmelden"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#009688"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +43,7 @@
         android:onClick="openActivityRegister"
         android:text="Register"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#009688"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +57,7 @@
         android:id="@+id/cardView"
         android:layout_width="280dp"
         android:layout_height="196dp"
+        android:fontFamily="sans-serif"
         android:text="QUIZ"
         android:textColor="#009688"
         android:textSize="124sp"
