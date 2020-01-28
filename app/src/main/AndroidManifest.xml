@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.findyourprivategrandpa">
+    package="com.example.quiz_lord">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,20 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.DesignQuestionActivity"></activity>
-        <activity android:name=".Activities.QuizBuilderHeader" />
-        <activity android:name=".Activities.QuizBuilderActivity" />
-        <activity android:name=".Activities.ScoreBoardActivity" />
-        <activity android:name=".Activities.QuizHubActivity" />
-        <activity android:name=".Activities.QuizBuilderUploadActivity" />
-        <activity android:name=".Activities.QuizResultActivity" />
-        <activity android:name=".Activities.QuestionSeparatorActivity" />
-        <activity android:name=".Activities.QuizStarterActivity" />
-        <activity android:name=".Activities.GameActivity" />
-        <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.Start" />
-        <activity android:name=".Activities.Anmelden" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name="com.example.quiz_lord.activities.DesignQuestionActivity"></activity>
+        <activity android:name="com.example.quiz_lord.activities.QuizBuilderHeader" />
+        <activity android:name="com.example.quiz_lord.activities.QuizBuilderActivity" />
+        <activity android:name="com.example.quiz_lord.activities.ScoreBoardActivity" />
+        <activity android:name="com.example.quiz_lord.activities.QuizHubActivity" />
+        <activity android:name="com.example.quiz_lord.activities.QuizBuilderUploadActivity" />
+        <activity android:name="com.example.quiz_lord.activities.QuizResultActivity" />
+        <activity android:name="com.example.quiz_lord.activities.QuestionSeparatorActivity" />
+        <activity android:name="com.example.quiz_lord.activities.QuizStarterActivity" />
+        <activity android:name="com.example.quiz_lord.activities.GameActivity" />
+        <activity android:name="com.example.quiz_lord.activities.RegisterActivity" />
+        <activity android:name="com.example.quiz_lord.activities.Start" />
+        <activity android:name="com.example.quiz_lord.activities.Anmelden" />
+        <activity android:name="com.example.quiz_lord.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

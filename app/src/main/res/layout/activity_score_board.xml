@@ -5,7 +5,7 @@
     android:id="@+id/scoreboard_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ScoreBoardActivity"
+    tools:context=".activities.ScoreBoardActivity"
     android:background="@drawable/background3">
 
         <androidx.recyclerview.widget.RecyclerView
