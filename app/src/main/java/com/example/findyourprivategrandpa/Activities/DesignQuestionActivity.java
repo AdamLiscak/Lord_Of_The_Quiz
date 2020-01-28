@@ -285,6 +285,17 @@ public class DesignQuestionActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onDestroy() {
+        saveValues();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed()
     {
         saveValues();

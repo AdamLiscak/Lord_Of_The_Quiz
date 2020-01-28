@@ -186,12 +186,16 @@ public class QuizBuilderHeader extends AppCompatActivity
         {
             JSONArray questions = quiz.getJSONArray("questions");
             PostMessageBuilder pm = new PostMessageBuilder();
+            quiz.put("author",LocalStorage.getString("username"));
             pm.addEntry("quiz", LocalStorage.getString("quiz"));
-            pm.addEntry("author", LocalStorage.getString("author"));
+            pm.addEntry("author", LocalStorage.getString("username"));
             BidirectionalRequest br = new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL+"?"+pm.getValues(),"");
             // JSONObject response = new JSONObject(br.getResponse());
             //   JSONArray qIDs=response.getJSONArray("qIDs");
-            int quizID = Integer.parseInt(br.getResponse());
+            String response = br.getResponse();
+            Log.d("uploadQUestions", "uploadQuestions: response:"+response);
+            int quizID = Integer.parseInt(response);
+            Log.d("uploadQuestions", "uploadQuestions: "+quizID);
             PostMessageBuilder pBuilder = new PostMessageBuilder();
             pBuilder.addEntry("quizID", "" + quizID);
             pBuilder.addEntry("picture", "-1");
@@ -201,14 +205,17 @@ public class QuizBuilderHeader extends AppCompatActivity
             {
                 PostMessageBuilder postBuilder = new PostMessageBuilder();
                 postBuilder.addEntry("quizID", "" + quizID);
-                postBuilder.addEntry("picture", "" + i);
-                ImageUploader iu = new ImageUploader(((JSONObject) questions.get(i)).getString("picture"), QUESTION_PICTURE_UPLOAD_URL+"?"+postBuilder.getValues(),"");
+                postBuilder.addEntry("picture", "" + (i+1));
+                String values = postBuilder.getValues();
+                Log.d("uploadQuestions", "uploadQuestions: "+values);
+                ImageUploader iu = new ImageUploader(((JSONObject) questions.get(i)).getString("picture"), QUESTION_PICTURE_UPLOAD_URL+"?"+values ,"");
                 iu.uploadImage();
             }
             finish();
         }
         catch (Exception e)
         {
+            Log.d("uloadQUestions", "uploadQuestions: "+e.toString());
             e.printStackTrace();
         }
        LocalStorage.removeString("quiz");

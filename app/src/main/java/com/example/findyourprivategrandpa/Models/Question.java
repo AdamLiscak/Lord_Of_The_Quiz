@@ -46,7 +46,7 @@ public class Question
     }
     public Question(JSONObject jsonQuestion) throws Exception
     {
-        this.id=jsonQuestion.getInt("id");
+        // this.id=jsonQuestion.getInt("id");
         this.name=jsonQuestion.getString("name");
         this.correctAnswer=jsonQuestion.getInt("correctAnswer");
         JSONArray jsonAnswers=jsonQuestion.getJSONArray("answers");

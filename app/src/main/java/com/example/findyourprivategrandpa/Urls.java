@@ -42,6 +42,6 @@ public class Urls
     public static final String LOGOUT_URL=UPLOAD_DIR+"logout.php";
     public static final String DELETE_ACCOUNT_URL=UPLOAD_DIR+"delete-account.php";
     public static final String QUIZ_THUMBNAIL_UPLOAD_URL=UPLOAD_DIR+"quiz-upload-thumbnail.php";
-    public static final String QUESTION_PICTURE_UPLOAD_URL=UPLOAD_DIR+"question-upload-picture.php";
+    public static final String QUESTION_PICTURE_UPLOAD_URL=UPLOAD_DIR+"uploadimage.php";
 
 }
