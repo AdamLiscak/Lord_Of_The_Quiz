@@ -43,7 +43,7 @@ public class HostResolver
                 }
                 catch (Exception e)
                 {
-                    System.out.println("penis");
+                    System.out.println("wiener");
                 }
 
             }
@@ -104,7 +104,7 @@ public class HostResolver
                 }
                 catch (Exception e)
                 {
-                    System.out.println("penis");
+                    System.out.println("wiener");
                 }
 
             }

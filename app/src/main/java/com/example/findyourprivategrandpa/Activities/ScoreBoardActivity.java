@@ -27,7 +27,8 @@ public class ScoreBoardActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new ScoreBoardAdapter(Quiz.getQuizzes()[Quiz.getCurrentQuiz()]);
-        recyclerView.setAdapter(mAdapter);
+            mAdapter = new ScoreBoardAdapter(Quiz.getQuizzes()[Quiz.getCurrentQuiz()]);
+            recyclerView.setAdapter(mAdapter);
+
     }
 }

@@ -48,7 +48,7 @@ public class BidirectionalRequest
                // String params = param1 + "&" + param2;
                 byte[] out = params.getBytes(StandardCharsets.UTF_8);
                 int length = out.length;
-                Log.d("LengthPenis", "run: "+length);
+                Log.d("LengthWiener", "run: "+length);
 
                 http.setFixedLengthStreamingMode(length);
                 http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");

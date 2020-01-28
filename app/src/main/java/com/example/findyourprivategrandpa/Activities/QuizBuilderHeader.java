@@ -112,7 +112,7 @@ public class QuizBuilderHeader extends AppCompatActivity
             }
             finally
             {
-                Log.d("hure", getPath(imageUri));
+                Log.d("altruistin", getPath(imageUri));
             }
             Picasso.with((getApplication())).load(imageUri).into(imageView);
          //   Worker worker = new Worker(imageView,data,);
@@ -219,5 +219,6 @@ public class QuizBuilderHeader extends AppCompatActivity
             e.printStackTrace();
         }
        LocalStorage.removeString("quiz");
+        LocalStorage.commit();
     }
 }

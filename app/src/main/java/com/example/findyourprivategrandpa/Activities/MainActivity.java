@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-        Log.d("penisCOock",getExternalFilesDir("Download/Images").getAbsolutePath());
-        Log.d("fuckAndroid", "onCreate: ");
+        Log.d("wienerHahn",getExternalFilesDir("Download/Images").getAbsolutePath());
+        Log.d("loveAndroid", "onCreate: ");
         if(LocalStorage.isNull("quiz"))
         {
             LocalStorage.changeProperty("quiz",new JSONObject());
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
      // LocalStorage.changeProperty("penis","small");
         if(LocalStorage.getConfiguration()!=null)
         {
-            Log.d("cockvars", "initiateVars: " + LocalStorage.getConfiguration().toString());
+            Log.d("Hahnvars", "initiateVars: " + LocalStorage.getConfiguration().toString());
         }
         else
         {

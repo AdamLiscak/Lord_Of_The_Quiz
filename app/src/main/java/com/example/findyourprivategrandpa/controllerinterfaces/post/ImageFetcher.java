@@ -39,7 +39,7 @@ public class ImageFetcher
                 // String params = param1 + "&" + param2;
                 byte[] out = params.getBytes(StandardCharsets.UTF_8);
                 int length = out.length;
-                Log.d("LengthPenis", "run: "+length);
+                Log.d("LengthWiener", "run: "+length);
                 http.setFixedLengthStreamingMode(length);
                 http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                 BufferedOutputStream os= new BufferedOutputStream(http.getOutputStream());
@@ -51,11 +51,11 @@ public class ImageFetcher
                 http.connect();
 
                 InputStream in = url.openStream();
-                Log.d("penis", "doInBackground: "+in.available());
+                Log.d("wiener", "doInBackground: "+in.available());
                 bmp = BitmapFactory.decodeStream(in);
 
             } catch (Exception e) {
-                Log.e("ErrorPenis", e.getMessage());
+                Log.e("ErrorWiener", e.getMessage());
                 e.printStackTrace();
             }
             this.bitmap=bmp;

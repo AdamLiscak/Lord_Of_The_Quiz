@@ -119,8 +119,14 @@ public class Quiz
     {
         PostMessageBuilder pm=new PostMessageBuilder();
         pm.addEntry("id",""+id);
+        Log.d("jsonScores", "pullHighScores: hello");
         BidirectionalRequest br= new BidirectionalRequest(HIGH_SCORES_BY_QUIZ_URL+"?"+pm.getValues(),"");
-        JSONArray jsonScores= new JSONArray(br.getResponse());
+        String response = br.getResponse();
+        if (response==null)
+        {
+            response="[]";
+        }
+        JSONArray jsonScores= new JSONArray(response);
         Log.d("jsonScores", "pullHighScores: "+jsonScores.toString());
         highScores = new ScoreStruct[jsonScores.length()];
         for (int i=0;i<jsonScores.length();i++)
