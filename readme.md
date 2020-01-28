@@ -2,6 +2,8 @@
 
 Ihr müsst euch eigentlich um fast gar nix kümmern: Die relevanten Klassen liegen im Package Models. Bilder sind noch nicht bei meinen Queries unterstützt.
 
+Manche Typen/Methoden können anders sein, ist obsolet... ich würd sie updaten... aber niemand hats gelesen.
+
 ## public class Quiz
  
 Neuen Quiz anlegen:
@@ -13,7 +15,7 @@ Holt einen Quiz mit der id "id" aus dem Server.
 ### Quiz.pullQuizzes() KLASSENMETHODE !!!
 
 Wird NIEMALS über die instanzierung eines Quiz Objektes aufgerufen.
-lädt eine Liste von Quizzes, die von der Datenbank geholt wird. Page gibt an welche ids wir haben wollen. Wenn zum Beispiel page=1... sucht es von 0-19... wenn page=2 sucht es von 20-39.Die Zahl kann auch anders sein.
+lädt eine Liste von Quizzes, die von der Datenbank geholt wird. Page gibt an welche ids wir haben wollen. Wenn zum Beispiel page=1... sucht es von 10-19... wenn page=2 sucht es von 20-39.Die Zahl kann auch anders sein.
 
 ### boolean quiz.isCorrect(int AnswerID);
 
