@@ -23,6 +23,9 @@ import android.widget.ImageView;
 
 import com.example.findyourprivategrandpa.Models.QuizBuilder;
 import com.example.findyourprivategrandpa.R;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.BidirectionalRequest;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.ImageUploader;
+import com.example.findyourprivategrandpa.controllerinterfaces.post.PostMessageBuilder;
 import com.example.findyourprivategrandpa.localStorage.LocalStorage;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +38,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+
+import static com.example.findyourprivategrandpa.Urls.QUESTION_PICTURE_UPLOAD_URL;
+import static com.example.findyourprivategrandpa.Urls.QUIZ_BUILDER_EXPORT_URL;
+import static com.example.findyourprivategrandpa.Urls.QUIZ_THUMBNAIL_UPLOAD_URL;
 
 public class QuizBuilderHeader extends AppCompatActivity
 {
@@ -171,5 +178,39 @@ public class QuizBuilderHeader extends AppCompatActivity
         }
         Intent intent = new Intent(this, QuizBuilderActivity.class);
         startActivity(intent);
+    }
+    public void uploadQuestions(View view)
+    {
+        JSONObject quiz = LocalStorage.getJSONObject("quiz");
+        try
+        {
+            JSONArray questions = quiz.getJSONArray("questions");
+            PostMessageBuilder pm = new PostMessageBuilder();
+            pm.addEntry("quiz", LocalStorage.getString("quiz"));
+            pm.addEntry("author", LocalStorage.getString("author"));
+            BidirectionalRequest br = new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL+"?"+pm.getValues(),"");
+            // JSONObject response = new JSONObject(br.getResponse());
+            //   JSONArray qIDs=response.getJSONArray("qIDs");
+            int quizID = Integer.parseInt(br.getResponse());
+            PostMessageBuilder pBuilder = new PostMessageBuilder();
+            pBuilder.addEntry("quizID", "" + quizID);
+            pBuilder.addEntry("picture", "-1");
+            ImageUploader iup = new ImageUploader(quiz.getString("thumbnail"), QUESTION_PICTURE_UPLOAD_URL+"?"+pBuilder.getValues(),"");
+            iup.uploadImage();
+            for (int i = 0; i < questions.length(); i++)
+            {
+                PostMessageBuilder postBuilder = new PostMessageBuilder();
+                postBuilder.addEntry("quizID", "" + quizID);
+                postBuilder.addEntry("picture", "" + i);
+                ImageUploader iu = new ImageUploader(((JSONObject) questions.get(i)).getString("picture"), QUESTION_PICTURE_UPLOAD_URL+"?"+postBuilder.getValues(),"");
+                iu.uploadImage();
+            }
+            finish();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+       LocalStorage.removeString("quiz");
     }
 }

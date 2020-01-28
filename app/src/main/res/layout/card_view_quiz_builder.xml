@@ -10,8 +10,10 @@
     card_view:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_view_quiz_builder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="editQuestion">
 
         <ImageView
             android:id="@+id/quiz_builder_question_image_view"
@@ -20,7 +22,8 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            card_view:srcCompat="@mipmap/ic_launcher"
+            tools:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/quiz_builder_question_name"
@@ -29,7 +32,10 @@
             android:layout_marginStart="8dp"
             android:text="Wo bin ich ?"
             card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.008"
             card_view:layout_constraintStart_toEndOf="@+id/quiz_builder_question_image_view"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.512" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -131,16 +131,8 @@ public class QuizBuilder
     public void export() throws Exception
     {
         PostMessageBuilder pm=new PostMessageBuilder();
-        try
-        {
-            quiz.put("username", LocalStorage.getString("username"));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
         pm.addEntry("quiz",LocalStorage.getString("quiz"));
-        pm.addEntry("userID",LocalStorage.getString("userID"));
+        pm.addEntry("author",LocalStorage.getString("author"));
         BidirectionalRequest br= new BidirectionalRequest(QUIZ_BUILDER_EXPORT_URL,pm.getValues());
        // JSONObject response = new JSONObject(br.getResponse());
      //   JSONArray qIDs=response.getJSONArray("qIDs");
