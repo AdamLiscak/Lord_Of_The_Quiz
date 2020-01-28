@@ -19,13 +19,13 @@
 
     <Button
         android:id="@+id/go"
-        android:layout_width="250dp"
-        android:layout_height="95dp"
+        android:layout_width="221dp"
+        android:layout_height="43dp"
         android:background="@drawable/custom_button"
         android:onClick="checkPassword"
         android:text="GO"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,12 +38,16 @@
     <EditText
         android:id="@+id/editText_username"
         style=" "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F8A4B7"
+        android:layout_width="223dp"
+        android:layout_height="47dp"
+        android:layout_marginLeft="3dp"
+        android:background="#000000"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,16 +64,21 @@
 
     <EditText
         android:id="@+id/editText_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#E9E1E1"
+        android:layout_width="223dp"
+        android:layout_height="47dp"
+        android:background="#000000"
         android:ems="10"
-        android:hint="passwort"
+        android:hint="Passwort"
         android:inputType="textPassword"
+        android:paddingLeft="8dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/go"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_username" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_username"
+        app:layout_constraintVertical_bias="0.345" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
